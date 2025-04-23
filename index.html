@@ -19,6 +19,7 @@
             position: fixed;
             height: 100%;
             width: 250px;
+            overflow-y: auto;
         }
         .site-branding {
             text-align: center;
@@ -42,9 +43,11 @@
         .sidebar ul {
             list-style: none;
             padding: 0;
+            margin: 20px 0 0 0;
         }
         .sidebar ul li {
-            margin: 10px 0;
+            margin: 15px 0;
+            font-size: 18px;
         }
         .sidebar ul li a {
             color: #ffffff;
@@ -86,6 +89,16 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
