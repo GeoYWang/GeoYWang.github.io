@@ -12,9 +12,9 @@
             padding: 0; /* 移除 body 元素的內邊距 */
             background-color: #f8f9fa; /* 設置背景顏色為淺灰色 */
         }
-    </style> <!-- 定義頁面的 CSS 樣式 -->
+    </style> 
 </head>
-<body> <!-- 開始頁面主體 -->
+<body> 
     <script> <!-- 開始 JavaScript 代碼 -->
         // 定義URL數組
         const chinaURLs = [ /* 中國大陸的 URL 列表 */
@@ -160,37 +160,37 @@
                     } else if (data.country_name === "South Korea") {
                         urls = koreaURLs;
                     } else if (
-                        data.country_name === "France" || /* 如果國家為法國 */
-                        data.country_name === "Belgium" || /* 或比利時 */
-                        data.country_name === "Switzerland" || /* 或瑞士 */
-                        data.country_name === "Canada" /* 或加拿大 */
+                        data.country_name === "France" ||
+                        data.country_name === "Belgium" || 
+                        data.country_name === "Switzerland" || 
+                        data.country_name === "Canada"
                     ) {
                         urls = frenchURLs; /* 使用法語國家的 URL 列表 */
                     } else if (
-                        data.country_name === "Germany" || /* 如果國家為德國 */
-                        data.country_name === "Austria" || /* 或奧地利 */
-                        data.country_name === "Liechtenstein" /* 或列支敦士登 */
+                        data.country_name === "Germany" ||
+                        data.country_name === "Austria" ||
+                        data.country_name === "Liechtenstein"
                     ) {
                         urls = germanURLs; /* 使用德語國家的 URL 列表 */
                     } else if (
-                        data.country_name === "Spain" || /* 如果國家為西班牙 */
-                        data.country_name === "Argentina" || /* 或阿根廷 */
-                        data.country_name === "Colombia" || /* 或哥倫比亞 */
-                        data.country_name === "Peru" || /* 或秘魯 */
-                        data.country_name === "Venezuela" || /* 或委內瑞拉 */
-                        data.country_name === "Ecuador" || /* 或厄瓜多爾 */
-                        data.country_name === "Bolivia" || /* 或玻利維亞 */
-                        data.country_name === "Paraguay" || /* 或巴拉圭 */
-                        data.country_name === "Costa Rica" || /* 或哥斯達黎加 */
-                        data.country_name === "Guatemala" || /* 或危地馬拉 */
-                        data.country_name === "Chile" /* 或智利 */
+                        data.country_name === "Spain" || 
+                        data.country_name === "Argentina" || 
+                        data.country_name === "Colombia" || 
+                        data.country_name === "Peru" ||
+                        data.country_name === "Venezuela" || 
+                        data.country_name === "Ecuador" ||
+                        data.country_name === "Bolivia" ||
+                        data.country_name === "Paraguay" || 
+                        data.country_name === "Costa Rica" ||
+                        data.country_name === "Guatemala" || 
+                        data.country_name === "Chile" 
                     ) {
                         urls = spanishURLs; /* 使用西班牙語國家的 URL 列表 */
                     } else if (
-                        data.country_name === "Italy" || /* 如果國家為意大利 */
-                        data.country_name === "San Marino" || /* 或聖馬力諾 */
-                        data.country_name === "Holy See" || /* 或教廷 */
-                        data.country_name === "Vatican City" /* 或梵蒂岡城 */
+                        data.country_name === "Italy" || 
+                        data.country_name === "San Marino" || 
+                        data.country_name === "Holy See" ||
+                        data.country_name === "Vatican City" 
                     ) {
                         urls = italianURLs; /* 使用意大利及其相關地區的 URL 列表 */
                     } else { /* 如果不屬於以上任何條件 */
@@ -208,6 +208,6 @@
 
             fetchIPAndLocation(); /* 執行獲取 IP 和地理位置的函數 */
         });
-    </script> <!-- 結束 JavaScript 代碼 -->
-</body> <!-- 結束頁面主體 -->
-</html> <!-- 結束 HTML 文件 -->
+    </script> 
+</body> 
+</html> 
