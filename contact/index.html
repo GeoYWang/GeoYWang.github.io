@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact List</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 2rem; }
+    h1 { color: #333; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 0.5rem 0; }
+    a { text-decoration: none; color: #0066cc; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Contact Links</h1>
+  <ul id="file-list">Loading...</ul>
+
+  <script>
+    // 替换成你的 GitHub 用户名和仓库名
+    const username = 'geoywang';
+    const repo = 'geoywang.github.io';  // 通常是你的用户名.github.io
+    const path = 'contact'; // 目录路径
+
+    fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then(files => {
+        const ul = document.getElementById('file-list');
+        ul.innerHTML = ''; // 清空 loading
+
+        files
+          .filter(file => file.name.endsWith('.html') && file.name !== 'index.html') // 排除 index.html
+          .forEach(file => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = file.name;
+            a.textContent = file.name.replace('.html', ''); // 去掉 .html 显示
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+
+        if (ul.children.length === 0) {
+          ul.innerHTML = '<li>No contact pages found.</li>';
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching file list:', err);
+        document.getElementById('file-list').innerHTML = 'Failed to load file list.';
+      });
+  </script>
+</body>
+</html>
