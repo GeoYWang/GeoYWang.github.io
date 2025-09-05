@@ -1,229 +1,381 @@
 <!DOCTYPE html>
-<html lang="en-US" class="no-js">
+<html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Language - 选择语言</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-	<style>
-		.custom-logo {
-			border-radius: 50%;
-		}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            height: 100vh;
+            background: url('https://bpb-us-e1.wpmucdn.com/wp.nyu.edu/dist/b/32320/files/2024/11/wp7653379.png') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-		/* 隐藏侧边栏 */
-		#sidebar {
-			display: none;
-		}
+        /* 背景遮罩层，增强内容可读性 */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
 
-		/* 调整主内容区域占满全宽 */
-		#content {
-			width: 100%;
-			max-width: 100%;
-			margin: 0;
-		}
+        .language-selection-area {
+            background: rgba(88, 47, 133, 0.8);
+            /* 修改：将 alpha 值从 0.15 增加到 0.5 以降低透明度，使区域更不透明 (Change: Increased alpha from 0.15 to 0.5 to reduce transparency, making the area more opaque) */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-		.content-area {
-			width: 100%;
-			max-width: 100%;
-		}
+        .entry-header {
+            margin-bottom: 2rem;
+        }
 
-		/* 重置body布局 */
-		body {
-			background-color: #674970;
-			margin: 0;
-			padding: 0;
-		}
+        .entry-title {
+            font-size: 2.8rem;
+            /* 增大字体大小 */
+            font-weight: 700;
+            color: white;
+            /* 修改为白色 */
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
 
-		/* 主容器样式 */
-		#page {
-			display: flex;
-			flex-direction: column;
-			min-height: 100vh;
-		}
+        .entry-content {
+            margin-bottom: 2.5rem;
+        }
 
-		/* 语言选择区域样式 - 使用原侧边栏的紫色背景 */
-		.language-selection-container {
-			background-color: #2e2256; /* 原侧边栏背景色 */
-			color: #ffffff; /* 白色文字 */
-			padding: 60px 20px;
-			text-align: center;
-			min-height: 100vh;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
+        .wp-block-group__inner-container {
+            padding: 0;
+        }
 
-		.language-selection-container h1 {
-			color: #ffffff;
-			font-size: 2.5em;
-			margin-bottom: 40px;
-			font-weight: 300;
-		}
+        .wp-block-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-		/* 语言列表样式 */
-		.language-list {
-			list-style: none;
-			padding: 0;
-			margin: 0 0 40px 0;
-			max-width: 600px;
-		}
+        .wp-block-list li {
+            margin: 0.8rem 0;
+        }
 
-		.language-list li {
-			margin: 15px 0;
-		}
+        .wp-block-list a {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            color: white;
+            /* 修改为白色 */
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 12px;
+            background: rgba(52, 73, 94, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-width: 280px;
+        }
 
-		.language-list a {
-			color: #ffffff;
-			text-decoration: none;
-			font-size: 1.2em;
-			padding: 12px 24px;
-			border: 2px solid rgba(255, 255, 255, 0.3);
-			border-radius: 6px;
-			display: inline-block;
-			transition: all 0.3s ease;
-			min-width: 300px;
-		}
+        .wp-block-list a:hover {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+            color: white;
+            /* 修改为白色 */
+        }
 
-		.language-list a:hover,
-		.language-list a:focus {
-			background-color: rgba(255, 255, 255, 0.1);
-			border-color: rgba(255, 255, 255, 0.6);
-			transform: translateY(-2px);
-		}
+        .social-icons-container {
+            border-top: 1px solid rgba(52, 73, 94, 0.1);
+            padding-top: 2rem;
+            margin-top: 1rem;
+        }
 
-		/* 社交媒体图标样式 */
-		.social-links {
-			display: flex;
-			gap: 20px;
-			justify-content: center;
-			flex-wrap: wrap;
-			margin-top: 40px;
-		}
+        .wp-block-social-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
-		.social-links a {
-			color: #ffffff;
-			text-decoration: none;
-			padding: 12px;
-			border: 2px solid rgba(255, 255, 255, 0.3);
-			border-radius: 50%;
-			transition: all 0.3s ease;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 50px;
-			height: 50px;
-		}
+        .wp-block-social-links li {
+            margin: 0;
+        }
 
-		.social-links a:hover,
-		.social-links a:focus {
-			background-color: rgba(255, 255, 255, 0.1);
-			border-color: rgba(255, 255, 255, 0.6);
-			transform: translateY(-2px) scale(1.1);
-		}
+        .wp-block-social-link-anchor {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: rgba(52, 73, 94, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
 
-		.social-links svg {
-			width: 24px;
-			height: 24px;
-			fill: currentColor;
-		}
+        .wp-block-social-link-anchor:hover {
+            background: rgba(52, 152, 219, 0.15);
+            border-color: rgba(52, 152, 219, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+        }
 
-		/* 响应式设计 */
-		@media (max-width: 768px) {
-			.language-selection-container {
-				padding: 40px 15px;
-			}
+        .wp-block-social-link-anchor svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            /* 修改为白色 */
+            transition: fill 0.3s ease;
+        }
 
-			.language-selection-container h1 {
-				font-size: 2em;
-				margin-bottom: 30px;
-			}
+        .wp-block-social-link-anchor:hover svg {
+            fill: white;
+            /* 修改为白色 */
+        }
 
-			.language-list a {
-				min-width: 250px;
-				font-size: 1.1em;
-			}
+        .screen-reader-text {
+            position: absolute !important;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0 !important;
+            border: 0 !important;
+            height: 1px !important;
+            width: 1px !important;
+            overflow: hidden;
+        }
 
-			.social-links {
-				gap: 15px;
-			}
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .language-selection-area {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
 
-			.social-links a {
-				width: 45px;
-				height: 45px;
-			}
-		}
+            .entry-title {
+                font-size: 2.2rem;
+                /* 响应式调整字体大小 */
+            }
 
-		/* 隐藏原有的文章结构 */
-		.hentry {
-			display: none;
-		}
-	</style>
-	
-	<title>Languages – Geo Wang (王禹嘉)</title>
+            .wp-block-list a {
+                min-width: 240px;
+                font-size: 1rem;
+                padding: 0.7rem 1.2rem;
+            }
+
+            .wp-block-social-links {
+                gap: 0.8rem;
+            }
+
+            .wp-block-social-link-anchor {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .language-selection-area {
+                padding: 1.5rem 1rem;
+            }
+
+            .entry-title {
+                font-size: 2rem;
+                /* 小屏幕下的字体大小 */
+            }
+
+            .wp-block-list a {
+                min-width: 200px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .language-selection-area {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .wp-block-list li {
+            opacity: 0;
+            animation: fadeInUp 0.4s ease-out forwards;
+        }
+
+        .wp-block-list li:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .wp-block-list li:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .wp-block-list li:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .wp-block-list li:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .wp-block-list li:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .wp-block-list li:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .wp-block-list li:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .social-icons-container {
+            opacity: 0;
+            animation: fadeInUp 0.4s ease-out 0.8s forwards;
+        }
+    </style>
 </head>
 
-<body class="page-template-default page custom-background wp-custom-logo wp-embed-responsive">
-<div id="page" class="hfeed site">
-	<a class="skip-link screen-reader-text" href="#content">
-		Skip to content
-	</a>
+<body>
+    <!-- Custom language selection area with sidebar header styles -->
+    <div class="language-selection-area">
+        <header class="entry-header">
+            <h1 class="entry-title">Select Language</h1>
+        </header>
+        <div class="entry-content">
+            <div class="wp-block-group">
+                <div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+                    <ul class="wp-block-list" style="text-align: center;">
+                        <li><a href="en-US.html">English</a></li>
+                        <li><a href="zh-CN.html">简体中文 (Simplified Chinese)</a></li>
+                        <li><a href="zh-TW.html">繁體中文 (Traditional Chinese)</a></li>
+                        <li><a href="wuu.html">吳語/上海話 (Wu Chinese/Shanghainese)</a></li>
+                        <li><a href="ja.html">日本語 (Japanese)</a></li>
+                        <li><a href="ko.html">한국어 (Korean)</a></li>
+                        <li><a href="fr.html">Français (French)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Social Media Icons moved here -->
+        <div class="social-icons-container">
+            <ul class="wp-block-social-links has-small-icon-size is-layout-flex wp-block-social-links-is-layout-flex">
+                <!-- GitHub (替换原Twitter位置) -->
+                <li class="wp-social-link wp-social-link-github wp-block-social-link">
+                    <a href="https://github.com/geoywang" class="wp-block-social-link-anchor"
+                        rel="noopener noreferrer" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" focusable="false">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        <span class="wp-block-social-link-label screen-reader-text">GitHub</span>
+                    </a>
+                </li>
 
-	<div id="content" class="site-content">
-		<div class="language-selection-container">
-			<h1>Select Language</h1>
-			
-			<ul class="language-list">
-				<li><a href="en-US.html">English</a></li>
-				<li><a href="zh-CN.html">简体中文 (Simplified Chinese)</a></li>
-				<li><a href="zh-TW.html">繁體中文 (Traditional Chinese)</a></li>
-				<li><a href="wuu.html">吳語/上海話 (Wu Chinese/Shanghainese)</a></li>
-				<li><a href="ja.html">日本語 (Japanese)</a></li>
-				<li><a href="ko.html">한국어 (Korean)</a></li>
-				<li><a href="fr.html">Français (French)</a></li>
-			</ul>
+                <!-- LinkedIn (替换原Facebook位置) -->
+                <li class="wp-social-link wp-social-link-linkedin wp-block-social-link">
+                    <a href="https://GeoYWang.github.io/contact/linkedin" class="wp-block-social-link-anchor"
+                        rel="noopener noreferrer" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" focusable="false">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                        <span class="wp-block-social-link-label screen-reader-text">LinkedIn</span>
+                    </a>
+                </li>
 
-			<div class="social-links">
-				<a href="https://twitter.com/Fluorure_Hydro" title="Twitter">
-					<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path d="M22.23,5.924c-0.736,0.326-1.527,0.547-2.357,0.646c0.847-0.508,1.498-1.312,1.804-2.27 c-0.793,0.47-1.671,0.812-2.606,0.996C18.324,4.498,17.257,4,16.077,4c-2.266,0-4.103,1.837-4.103,4.103 c0,0.322,0.036,0.635,0.106,0.935C8.67,8.867,5.647,7.234,3.623,4.751C3.27,5.357,3.067,6.062,3.067,6.814 c0,1.424,0.724,2.679,1.825,3.415c-0.673-0.021-1.305-0.206-1.859-0.513c0,0.017,0,0.034,0,0.052c0,1.988,1.414,3.647,3.292,4.023 c-0.344,0.094-0.707,0.144-1.081,0.144c-0.264,0-0.521-0.026-0.772-0.074c0.522,1.63,2.038,2.816,3.833,2.85 c-1.404,1.1-3.174,1.756-5.096,1.756c-0.331,0-0.658-0.019-0.979-0.057c1.816,1.164,3.973,1.843,6.29,1.843 c7.547,0,11.675-6.252,11.675-11.675c0-0.178-0.004-0.355-0.012-0.531C20.985,7.47,21.68,6.747,22.23,5.924z"></path>
-					</svg>
-				</a>
-				
-				<a href="https://www.facebook.com/profile.php?id=100090126532906" title="Facebook">
-					<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path d="M12 2C6.5 2 2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12c0-5.5-4.5-10-10-10z"></path>
-					</svg>
-				</a>
-				
-				<a href="https://www.youtube.com/@geowang" title="YouTube">
-					<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path d="M21.8,8.001c0,0-0.195-1.378-0.795-1.985c-0.76-0.797-1.613-0.801-2.004-0.847c-2.799-0.202-6.997-0.202-6.997-0.202 h-0.009c0,0-4.198,0-6.997,0.202C4.608,5.216,3.756,5.22,2.995,6.016C2.395,6.623,2.2,8.001,2.2,8.001S2,9.62,2,11.238v1.517 c0,1.618,0.2,3.237,0.2,3.237s0.195,1.378,0.795,1.985c0.761,0.797,1.76,0.771,2.205,0.855c1.6,0.153,6.8,0.201,6.8,0.201 s4.203-0.006,7.001-0.209c0.391-0.047,1.243-0.051,2.004-0.847c0.6-0.607,0.795-1.985,0.795-1.985s0.2-1.618,0.2-3.237v-1.517 C22,9.62,21.8,8.001,21.8,8.001z M9.935,14.594l-0.001-5.62l5.404,2.82L9.935,14.594z"></path>
-					</svg>
-				</a>
-				
-				<a href="https://www.instagram.com/geoxywang" title="Instagram">
-					<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path d="M12,4.622c2.403,0,2.688,0.009,3.637,0.052c0.877,0.04,1.354,0.187,1.671,0.31c0.42,0.163,0.72,0.358,1.035,0.673 c0.315,0.315,0.51,0.615,0.673,1.035c0.123,0.317,0.27,0.794,0.31,1.671c0.043,0.949,0.052,1.234,0.052,3.637 s-0.009,2.688-0.052,3.637c-0.04,0.877-0.187,1.354-0.31,1.671c-0.163,0.42-0.358,0.72-0.673,1.035 c-0.315,0.315-0.615,0.51-1.035,0.673c-0.317,0.123-0.794,0.27-1.671,0.31c-0.949,0.043-1.233,0.052-3.637,0.052 s-2.688-0.009-3.637-0.052c-0.877-0.04-1.354-0.187-1.671-0.31c-0.42-0.163-0.72-0.358-1.035-0.673 c-0.315-0.315-0.51-0.615-0.673-1.035c-0.123-0.317-0.27-0.794-0.31-1.671C4.631,14.688,4.622,14.403,4.622,12 s0.009-2.688,0.052-3.637c0.04-0.877,0.187-1.354,0.31-1.671c0.163-0.42,0.358-0.72,0.673-1.035 c0.315-0.315,0.615-0.51,1.035-0.673c0.317-0.123,0.794-0.27,1.671-0.31C9.312,4.631,9.597,4.622,12,4.622 M12,3 C9.556,3,9.249,3.01,8.289,3.054C7.331,3.098,6.677,3.25,6.105,3.472C5.513,3.702,5.011,4.01,4.511,4.511 c-0.5,0.5-0.808,1.002-1.038,1.594C3.25,6.677,3.098,7.331,3.054,8.289C3.01,9.249,3,9.556,3,12c0,2.444,0.01,2.751,0.054,3.711 c0.044,0.958,0.196,1.612,0.418,2.185c0.23,0.592,0.538,1.094,1.038,1.594c0.5,0.5,1.002,0.808,1.594,1.038 c0.572,0.222,1.227,0.375,2.185,0.418C9.249,20.99,9.556,21,12,21s2.751-0.01,3.711-0.054c0.958-0.044,1.612-0.196,2.185-0.418 c0.592-0.23,1.094-0.538,1.594-1.038c0.5-0.5,0.808-1.002,1.038-1.594c0.222-0.572,0.375-1.227,0.418-2.185 C20.99,14.751,21,14.444,21,12s-0.01-2.751-0.054-3.711c-0.044-0.958-0.196-1.612-0.418-2.185c-0.23-0.592-0.538-1.094-1.038-1.594 c-0.5-0.5-1.002-0.808-1.594-1.038c-0.572-0.222-1.227-0.375-2.185-0.418C14.751,3.01,14.444,3,12,3L12,3z M12,7.378 c-2.552,0-4.622,2.069-4.622,4.622S9.448,16.622,12,16.622s4.622-2.069,4.622-4.622S14.552,7.378,12,7.378z M12,15 c-1.657,0-3-1.343-3-3s1.343-3,3-3s3,1.343,3,3S13.657,15,12,15z M16.804,6.116c-0.596,0-1.08,0.484-1.08,1.08 s0.484,1.08,1.08,1.08c0.596,0,1.08-0.484,1.08-1.08S17.401,6.116,16.804,6.116z"></path>
-					</svg>
-				</a>
-				
-				<a href="https://wa.me/447410420993" title="WhatsApp">
-					<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path d="M 12.011719 2 C 6.5057187 2 2.0234844 6.478375 2.0214844 11.984375 C 2.0204844 13.744375 2.4814687 15.462563 3.3554688 16.976562 L 2 22 L 7.2324219 20.763672 C 8.6914219 21.559672 10.333859 21.977516 12.005859 21.978516 L 12.009766 21.978516 C 17.514766 21.978516 21.995047 17.499141 21.998047 11.994141 C 22.000047 9.3251406 20.962172 6.8157344 19.076172 4.9277344 C 17.190172 3.0407344 14.683719 2.001 12.011719 2 z M 12.009766 4 C 14.145766 4.001 16.153109 4.8337969 17.662109 6.3417969 C 19.171109 7.8517969 20.000047 9.8581875 19.998047 11.992188 C 19.996047 16.396187 16.413812 19.978516 12.007812 19.978516 C 10.674812 19.977516 9.3544062 19.642812 8.1914062 19.007812 L 7.5175781 18.640625 L 6.7734375 18.816406 L 4.8046875 19.28125 L 5.2851562 17.496094 L 5.5019531 16.695312 L 5.0878906 15.976562 C 4.3898906 14.768562 4.0204844 13.387375 4.0214844 11.984375 C 4.0234844 7.582375 7.6067656 4 12.009766 4 z M 8.4765625 7.375 C 8.3095625 7.375 8.0395469 7.4375 7.8105469 7.6875 C 7.5815469 7.9365 6.9355469 8.5395781 6.9355469 9.7675781 C 6.9355469 10.995578 7.8300781 12.182609 7.9550781 12.349609 C 8.0790781 12.515609 9.68175 15.115234 12.21875 16.115234 C 14.32675 16.946234 14.754891 16.782234 15.212891 16.740234 C 15.670891 16.699234 16.690438 16.137687 16.898438 15.554688 C 17.106437 14.971687 17.106922 14.470187 17.044922 14.367188 C 16.982922 14.263188 16.816406 14.201172 16.566406 14.076172 C 16.317406 13.951172 15.090328 13.348625 14.861328 13.265625 C 14.632328 13.182625 14.464828 13.140625 14.298828 13.390625 C 14.132828 13.640625 13.655766 14.201187 13.509766 14.367188 C 13.363766 14.534188 13.21875 14.556641 12.96875 14.431641 C 12.71875 14.305641 11.914938 14.041406 10.960938 13.191406 C 10.218937 12.530406 9.7182656 11.714844 9.5722656 11.464844 C 9.4272656 11.215844 9.5585938 11.079078 9.6835938 10.955078 C 9.7955938 10.843078 9.9316406 10.663578 10.056641 10.517578 C 10.180641 10.371578 10.223641 10.267562 10.306641 10.101562 C 10.389641 9.9355625 10.347156 9.7890625 10.285156 9.6640625 C 10.223156 9.5390625 9.737625 8.3065 9.515625 7.8125 C 9.328625 7.3975 9.131125 7.3878594 8.953125 7.3808594 C 8.808125 7.3748594 8.6425625 7.375 8.4765625 7.375 z"></path>
-					</svg>
-				</a>
-				
-				<a href="https://t.me/Acide_Fluorhydrique" title="Telegram">
-					<svg width="24" height="24" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-						<path d="M28.9700376,63.3244248 C47.6273373,55.1957357 60.0684594,49.8368063 66.2934036,47.2476366 C84.0668845,39.855031 87.7600616,38.5708563 90.1672227,38.528 C90.6966555,38.5191258 91.8804274,38.6503351 92.6472251,39.2725385 C93.294694,39.7979149 93.4728387,40.5076237 93.5580865,41.0057381 C93.6433345,41.5038525 93.7494885,42.63857 93.6651041,43.5252052 C92.7019529,53.6451182 88.5344133,78.2034783 86.4142057,89.5379542 C85.5170662,94.3339958 83.750571,95.9420841 82.0403991,96.0994568 C78.3237996,96.4414641 75.5015827,93.6432685 71.9018743,91.2836143 C66.2690414,87.5912212 63.0868492,85.2926952 57.6192095,81.6896017 C51.3004058,77.5256038 55.3966232,75.2369981 58.9976911,71.4967761 C59.9401076,70.5179421 76.3155302,55.6232293 76.6324771,54.2720454 C76.6721165,54.1030573 76.7089039,53.4731496 76.3346867,53.1405352 C75.9604695,52.8079208 75.4081573,52.921662 75.0095933,53.0121213 C74.444641,53.1403447 65.4461175,59.0880351 48.0140228,70.8551922 C45.4598218,72.6091037 43.1463059,73.4636682 41.0734751,73.4188859 C38.7883453,73.3695169 34.3926725,72.1268388 31.1249416,71.0646282 C27.1169366,69.7617838 23.931454,69.0729605 24.208838,66.8603276 C24.3533167,65.7078514 25.9403832,64.5292172 28.9700376,63.3244248 Z" />
-					</svg>
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
+                <!-- Mastodon (替换原YouTube位置) -->
+                <li class="wp-social-link wp-social-link-mastodon wp-block-social-link">
+                    <a href="https://mathstodon.xyz/@sudo" class="wp-block-social-link-anchor"
+                        rel="noopener noreferrer" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" focusable="false">
+                            <path
+                                d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z" />
+                        </svg>
+                        <span class="wp-block-social-link-label screen-reader-text">Mastodon</span>
+                    </a>
+                </li>
 
+                <!-- Instagram (保持原位置) -->
+                <li class="wp-social-link wp-social-link-instagram wp-block-social-link">
+                    <a href="https://GeoYWang.github.io/contact/instagram" class="wp-block-social-link-anchor"
+                        rel="noopener noreferrer" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" focusable="false">
+                            <path
+                                d="M12,4.622c2.403,0,2.688,0.009,3.637,0.052c0.877,0.04,1.354,0.187,1.671,0.31c0.42,0.163,0.72,0.358,1.035,0.673 c0.315,0.315,0.51,0.615,0.673,1.035c0.123,0.317,0.27,0.794,0.31,1.671c0.043,0.949,0.052,1.234,0.052,3.637 s-0.009,2.688-0.052,3.637c-0.04,0.877-0.187,1.354-0.31,1.671c-0.163,0.42-0.358,0.72-0.673,1.035 c-0.315,0.315-0.615,0.51-1.035,0.673c-0.317,0.123-0.794,0.27-1.671,0.31c-0.949,0.043-1.233,0.052-3.637,0.052 s-2.688-0.009-3.637-0.052c-0.877-0.04-1.354-0.187-1.671-0.31c-0.42-0.163-0.72-0.358-1.035-0.673 c-0.315-0.315-0.51-0.615-0.673-1.035c-0.123-0.317-0.27-0.794-0.31-1.671C4.631,14.688,4.622,14.403,4.622,12 s0.009-2.688,0.052-3.637c0.04-0.877,0.187-1.354,0.31-1.671c0.163-0.42,0.358-0.72,0.673-1.035 c0.315-0.315,0.615-0.51,1.035-0.673c0.317-0.123,0.794-0.27,1.671-0.31C9.312,4.631,9.597,4.622,12,4.622 M12,3 C9.556,3,9.249,3.01,8.289,3.054C7.331,3.098,6.677,3.25,6.105,3.472C5.513,3.702,5.011,4.01,4.511,4.511 c-0.5,0.5-0.808,1.002-1.038,1.594C3.25,6.677,3.098,7.331,3.054,8.289C3.01,9.249,3,9.556,3,12c0,2.444,0.01,2.751,0.054,3.711 c0.044,0.958,0.196,1.612,0.418,2.185c0.23,0.592,0.538,1.094,1.038,1.594c0.5,0.5,1.002,0.808,1.594,1.038 c0.572,0.222,1.227,0.375,2.185,0.418C9.249,20.99,9.556,21,12,21s2.751-0.01,3.711-0.054c0.958-0.044,1.612-0.196,2.185-0.418 c0.592-0.23,1.094-0.538,1.594-1.038c0.5-0.5,0.808-1.002,1.038-1.594c0.222-0.572,0.375-1.227,0.418-2.185 C20.99,14.751,21,14.444,21,12s-0.01-2.751-0.054-3.711c-0.044-0.958-0.196-1.612-0.418-2.185c-0.23-0.592-0.538-1.094-1.038-1.594 c-0.5-0.5-1.002-0.808-1.594-1.038c-0.572-0.222-1.227-0.375-2.185-0.418C14.751,3.01,14.444,3,12,3L12,3z M12,7.378 c-2.552,0-4.622,2.069-4.622,4.622S9.448,16.622,12,16.622s4.622-2.069,4.622-4.622S14.552,7.378,12,7.378z M12,15 c-1.657,0-3-1.343-3-3s1.343-3,3-3s3,1.343,3,3S13.657,15,12,15z M16.804,6.116c-0.596,0-1.08,0.484-1.08,1.08 s0.484,1.08,1.08,1.08c0.596,0,1.08-0.484,1.08-1.08S17.401,6.116,16.804,6.116z" />
+                        </svg>
+                        <span class="wp-block-social-link-label screen-reader-text">Instagram</span>
+                    </a>
+                </li>
+
+                <!-- YouTube (从原第3位移至第5位) -->
+                <li class="wp-social-link wp-social-link-youtube wp-block-social-link">
+                    <a href="https://GeoYWang.github.io/contact/youtube" class="wp-block-social-link-anchor"
+                        rel="noopener noreferrer" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" focusable="false">
+                            <path
+                                d="M21.8,8.001c0,0-0.195-1.378-0.795-1.985c-0.76-0.797-1.613-0.801-2.004-0.847c-2.799-0.202-6.997-0.202-6.997-0.202 h-0.009c0,0-4.198,0-6.997,0.202C4.608,5.216,3.756,5.22,2.995,6.016C2.395,6.623,2.2,8.001,2.2,8.001S2,9.62,2,11.238v1.517 c0,1.618,0.2,3.237,0.2,3.237s0.195,1.378,0.795,1.985c0.761,0.797,1.76,0.771,2.205,0.855c1.6,0.153,6.8,0.201,6.8,0.201 s4.203-0.006,7.001-0.209c0.391-0.047,1.243-0.051,2.004-0.847c0.6-0.607,0.795-1.985,0.795-1.985s0.2-1.618,0.2-3.237v-1.517 C22,9.62,21.8,8.001,21.8,8.001z M9.935,14.594l-0.001-5.62l5.404,2.82L9.935,14.594z" />
+                        </svg>
+                        <span class="wp-block-social-link-label screen-reader-text">YouTube</span>
+                    </a>
+                </li>
+
+                <!-- WeChat (替换原Telegram位置) -->
+                <li class="wp-social-link wp-social-link-wechat wp-block-social-link">
+                    <a href="https://GeoYWang.github.io/contact/wechat" class="wp-block-social-link-anchor"
+                        rel="noopener noreferrer" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" focusable="false">
+                            <path
+                                d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.181 0 .655-.52 1.186-1.162 1.186-.642 0-1.162-.531-1.162-1.186 0-.652.52-1.181 1.162-1.181zm5.813 0c.642 0 1.162.529 1.162 1.181 0 .655-.52 1.186-1.162 1.186-.642 0-1.162-.531-1.162-1.186 0-.652.52-1.181 1.162-1.181zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.248 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088l.594-.034zm-2.946 2.654c.55 0 .997.425.997.949 0 .525-.448.95-.997.95-.55 0-.997-.425-.997-.95 0-.524.448-.95.997-.95zm4.684 0c.55 0 .997.425.997.949 0 .525-.447.95-.997.95-.549 0-.996-.425-.996-.95 0-.524.447-.95.996-.95z" />
+                        </svg>
+                        <span class="wp-block-social-link-label screen-reader-text">WeChat</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- End of custom language selection area -->
 </body>
+
 </html>
