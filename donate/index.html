@@ -49,8 +49,8 @@
             width: 200%;
             height: 200%;
             background: radial-gradient(circle at 20% 80%, var(--nyu-violet) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, var(--ultra-violet) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(137, 0, 225, 0.3) 0%, transparent 50%);
+                         radial-gradient(circle at 80% 20%, var(--ultra-violet) 0%, transparent 50%),
+                         radial-gradient(circle at 40% 40%, rgba(137, 0, 225, 0.3) 0%, transparent 50%);
             animation: backgroundMove 20s ease-in-out infinite;
             opacity: 0.3;
         }
@@ -279,7 +279,8 @@
         .qr-placeholder {
             width: 200px;
             height: 200px;
-            background: var(--white);
+            /* Remove white background to let the image be the focus */
+            /* background: var(--white); */
             margin: 1rem auto;
             border-radius: 12px;
             display: flex;
@@ -288,6 +289,14 @@
             color: var(--black);
             font-weight: bold;
         }
+        
+        .qr-placeholder img {
+             width: 100%;
+             height: 100%;
+             border-radius: 12px;
+             object-fit: contain;
+        }
+
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -324,7 +333,6 @@
     </header>
 
     <main>
-        <!-- English Content -->
         <div id="content-en">
             <div class="hero">
                 <h1>Support My Work</h1>
@@ -384,7 +392,7 @@
                         <div class="payment-title">Zelle</div>
                     </div>
                     <div class="payment-description">US bank transfer via Zelle</div>
-                    <div class="payment-status">Email/Phone</div>
+                    <div class="payment-status">QR Code</div> <!-- 修改：將狀態從"Email/Phone"改為"QR Code"，以匹配掃碼方式 -->
                 </div>
 
                 <div class="payment-card" onclick="openPaymentModal('btc')">
@@ -406,12 +414,11 @@
                         <div class="payment-title">PayPal</div>
                     </div>
                     <div class="payment-description">Global payment via PayPal</div>
-                    <div class="payment-status">Link</div>
+                    <div class="payment-status">QR Code</div> <!-- 修改：將狀態從"Link"改為"QR Code"，以匹配掃碼方式 -->
                 </div>
             </div>
         </div>
 
-        <!-- Chinese Content -->
         <div id="content-zh" class="hidden">
             <div class="hero">
                 <h1>支持我的工作</h1>
@@ -446,10 +453,10 @@
                         <div class="payment-icon">
                             <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f4/97/80/f497805e-7cf6-5df3-f6a5-3ee7e4d8271a/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/350x350.png?" alt="AlipayHK">
                         </div>
-                        <div class="payment-title">香港支付宝</div>
+                        <div class="payment-title">支付寶香港</div>
                     </div>
-                    <div class="payment-description">香港地区支付宝付款</div>
-                    <div class="payment-status">二维码</div>
+                    <div class="payment-description">支付寶香港捐款</div>
+                    <div class="payment-status">二維碼</div>
                 </div>
 
                 <div class="payment-card" onclick="openPaymentModal('unionpay')">
@@ -471,7 +478,7 @@
                         <div class="payment-title">Zelle</div>
                     </div>
                     <div class="payment-description">美国银行转账服务</div>
-                    <div class="payment-status">邮箱/手机</div>
+                    <div class="payment-status">二维码</div> <!-- 修改：將狀態從"邮箱/手机"改為"二維碼"，以匹配掃碼方式 -->
                 </div>
 
                 <div class="payment-card" onclick="openPaymentModal('btc')">
@@ -493,24 +500,33 @@
                         <div class="payment-title">PayPal</div>
                     </div>
                     <div class="payment-description">全球PayPal支付</div>
-                    <div class="payment-status">链接</div>
+                    <div class="payment-status">二維碼</div> <!-- 修改：將狀態從"链接"改為"二維碼"，以匹配掃碼方式 -->
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Payment Modal -->
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closePaymentModal()">&times;</span>
             <h3 id="modal-title">Payment Method</h3>
             <div id="modal-content">
-                <!-- Content will be dynamically inserted -->
-            </div>
+                </div>
         </div>
     </div>
 
     <script>
+        // Define QR code paths
+        const qrCodes = {
+            wechat: 'images/wechat.jpg',
+            alipay: 'images/alipay.jpg',
+            alipayhk: 'images/alipayhk.jpg',
+            unionpay: 'images/unionpay.jpg',
+            btc: 'images/btc.png', // Assuming you might use a .png for crypto
+            zelle: 'images/zelle.jpg', // Although we won't show QR for zelle, keeping the link
+            paypal: 'images/paypal.jpg', // Although we won't show QR for paypal, keeping the link
+        };
+
         // Language switching
         function switchLanguage(lang) {
             const enContent = document.getElementById('content-en');
@@ -540,100 +556,85 @@
             const isZh = document.getElementById('content-zh').classList.contains('hidden') === false;
 
             let title, content;
+            const qrPath = qrCodes[method];
+
+            // Helper function to generate QR content for common methods
+            const generateQRContent = (title_en, title_zh, desc_en, desc_zh) => `
+                <div class="qr-placeholder">
+                    <img src="${qrPath}" alt="${title_en} QR Code" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <p>${isZh ? desc_zh : desc_en}</p>
+            `;
 
             switch(method) {
                 case 'wechat':
                     title = isZh ? '微信支付' : 'WeChat Pay';
-                    content = `
-                        <div class="qr-placeholder">
-                            ${isZh ? '微信收款码' : 'WeChat QR Code'}
-                        </div>
-                        <p>${isZh ? '请使用微信扫描上方二维码进行支付' : 'Please scan the QR code above with WeChat to pay'}</p>
-                        <p style="font-size: 0.9em; color: #999; margin-top: 1rem;">
-                            ${isZh ? '* 您需要在此处放置真实的收款二维码' : '* You need to place your actual payment QR code here'}
-                        </p>
-                    `;
+                    content = generateQRContent(
+                        'WeChat Pay', '微信支付',
+                        'Please scan the QR code above with WeChat to pay.', 
+                        '请使用微信扫描上方二维码进行支付。'
+                    );
                     break;
                 case 'alipay':
                     title = isZh ? '支付宝' : 'Alipay';
-                    content = `
-                        <div class="qr-placeholder">
-                            ${isZh ? '支付宝收款码' : 'Alipay QR Code'}
-                        </div>
-                        <p>${isZh ? '请使用支付宝扫描上方二维码进行支付' : 'Please scan the QR code above with Alipay to pay'}</p>
-                        <p style="font-size: 0.9em; color: #999; margin-top: 1rem;">
-                            ${isZh ? '* 您需要在此处放置真实的收款二维码' : '* You need to place your actual payment QR code here'}
-                        </p>
-                    `;
+                    content = generateQRContent(
+                        'Alipay', '支付宝',
+                        'Please scan the QR code above with Alipay to pay.', 
+                        '请使用支付宝扫描上方二维码进行支付。'
+                    );
                     break;
                 case 'alipayhk':
-                    title = isZh ? '香港支付宝' : 'AlipayHK';
-                    content = `
-                        <div class="qr-placeholder">
-                            ${isZh ? 'AlipayHK收款码' : 'AlipayHK QR Code'}
-                        </div>
-                        <p>${isZh ? '请使用AlipayHK扫描上方二维码进行支付' : 'Please scan the QR code above with AlipayHK to pay'}</p>
-                        <p style="font-size: 0.9em; color: #999; margin-top: 1rem;">
-                            ${isZh ? '* 您需要在此处放置真实的收款二维码' : '* You need to place your actual payment QR code here'}
-                        </p>
-                    `;
+                    title = isZh ? '' : 'AlipayHK';
+                    content = generateQRContent(
+                        'AlipayHK', '支付寶香港',
+                        'Please scan the QR code above with AlipayHK to pay.',
+                        '請使用支付寶香港掃描上方二維碼進行捐款。'
+                    );
                     break;
                 case 'unionpay':
                     title = isZh ? '银联' : 'UnionPay';
-                    content = `
-                        <div class="qr-placeholder">
-                            ${isZh ? '银联收款码' : 'UnionPay QR Code'}
-                        </div>
-                        <p>${isZh ? '请使用云闪付或银联APP扫描上方二维码' : 'Please scan the QR code above with UnionPay app'}</p>
-                        <p style="font-size: 0.9em; color: #999; margin-top: 1rem;">
-                            ${isZh ? '* 您需要在此处放置真实的收款二维码' : '* You need to place your actual payment QR code here'}
-                        </p>
-                    `;
+                    content = generateQRContent(
+                        'UnionPay', '银联',
+                        'Please scan the QR code above with UnionPay app.',
+                        '请使用云闪付或银联APP扫描上方二维码。'
+                    );
                     break;
+
+                // 修改：將Zelle改為QR碼顯示，使用generateQRContent函數，添加掃描說明文字
                 case 'zelle':
-                    title = 'Zelle';
-                    content = `
-                        <div style="padding: 2rem; background: rgba(137, 0, 225, 0.1); border-radius: 12px; margin: 1rem 0;">
-                            <h4>${isZh ? 'Zelle 信息' : 'Zelle Information'}</h4>
-                            <p style="margin: 1rem 0;">
-                                <strong>${isZh ? '邮箱或手机号：' : 'Email or Phone:'}</strong><br>
-                                <span style="color: #8900e1;">your-email@example.com</span>
-                            </p>
-                            <p style="font-size: 0.9em; color: #999;">
-                                ${isZh ? '* 请在您的银行APP中选择Zelle转账，使用上述信息' : '* Please use Zelle transfer in your banking app with the above information'}
-                            </p>
-                        </div>
-                    `;
+                    title = isZh ? 'Zelle' : 'Zelle';
+                    content = generateQRContent(
+                        'Zelle', 'Zelle',
+                        'Please scan the QR code above with your Zelle app to pay.',
+                        '請使用Zelle應用掃描上方二維碼進行支付。'
+                    );
                     break;
+
                 case 'btc':
-                    title = isZh ? '比特币' : 'Bitcoin';
+                    title = isZh ? '比特币 (BTC)' : 'Bitcoin (BTC)';
                     content = `
                         <div style="padding: 2rem; background: rgba(137, 0, 225, 0.1); border-radius: 12px; margin: 1rem 0;">
+                            <div class="qr-placeholder" style="width: 150px; height: 150px; margin: 0.5rem auto;">
+                                <img src="https://geoywang.github.io/donate/images/bitcoin.png" alt="Bitcoin QR Code">
+                            </div>
                             <h4>${isZh ? 'Bitcoin 地址' : 'Bitcoin Address'}</h4>
-                            <p style="margin: 1rem 0; word-break: break-all; font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
-                                bc1q...your-bitcoin-address-here...
+                            <p style="margin: 1rem 0; word-break: break-all; font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-size: 0.8rem;">
+                                bc1qg2gkh9zc3pzg5amp7gmc24jxd9mlufc4laexam
                             </p>
-                            <p style="font-size: 0.9em; color: #999;">
-                                ${isZh ? '* 请复制上述地址到您的钱包应用中进行转账' : '* Please copy the address above to your wallet app for transfer'}
+                            <p style="font-size: 0.9em; color: var(--gray-200);">
+                                ${isZh ? '请扫描二维码或复制上述地址到您的钱包应用中进行转账。' : 'Please scan the QR or copy the address above to your wallet app for transfer.'}
                             </p>
                         </div>
                     `;
                     break;
+                // 修改：將PayPal改為QR碼顯示，使用generateQRContent函數，添加掃描說明文字（移除原連結按鈕）
                 case 'paypal':
-                    title = 'PayPal';
-                    content = `
-                        <div style="padding: 2rem; background: rgba(137, 0, 225, 0.1); border-radius: 12px; margin: 1rem 0;">
-                            <h4>${isZh ? 'PayPal 支付' : 'PayPal Payment'}</h4>
-                            <p style="margin: 1rem 0;">
-                                <a href="#" style="color: #8900e1; text-decoration: none; font-weight: bold;">
-                                    ${isZh ? '点击此处通过PayPal支付' : 'Click here to pay via PayPal'}
-                                </a>
-                            </p>
-                            <p style="font-size: 0.9em; color: #999;">
-                                ${isZh ? '* 您需要设置实际的PayPal支付链接' : '* You need to set up your actual PayPal payment link'}
-                            </p>
-                        </div>
-                    `;
+                    title = isZh ? 'PayPal' : 'PayPal';
+                    content = generateQRContent(
+                        'PayPal', 'PayPal',
+                        'Please scan the QR code above with PayPal to pay.',
+                        '請使用PayPal掃描上方二維碼進行支付。'
+                    );
                     break;
             }
 
