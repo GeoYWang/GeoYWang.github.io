@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"
+        href="https://play-lh.googleusercontent.com/EyZzBivWAT_6dFOiIZ9JwuyE8duosWa98oDXe46yVUqMMTp07b0JVdmJEYxMrRWXzl1K=w240-h480-rw"
+        type="image/png">
+
+    <title>WeChat Security Advisory - Contact Information</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #111;
+            border: 2px solid #00ff41;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #00ff41;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            color: #ff4444;
+            text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #ffaa00;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .warning-box {
+            background: #1a0000;
+            border: 2px solid #ff4444;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: "⚠️ SECURITY ALERT";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #1a0000;
+            color: #ff4444;
+            padding: 0 10px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .section {
+            margin: 30px 0;
+        }
+
+        .section h2 {
+            color: #ffaa00;
+            border-left: 4px solid #ffaa00;
+            padding-left: 15px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .vulnerability-list {
+            background: #0d1a0d;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .vulnerability-item {
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px dotted #333;
+        }
+
+        .vulnerability-item:last-child {
+            border-bottom: none;
+        }
+
+        .vuln-title {
+            color: #ff6666;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .vuln-desc {
+            color: #cccccc;
+            margin-left: 20px;
+        }
+
+        .code-block {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 3px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: #00ff41;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .alternative-contact {
+            background: #0a1a0a;
+            border: 2px solid #00ff41;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-method {
+            color: #00ff41;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .contact-method .label {
+            color: #ffaa00;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            border-top: 2px solid #00ff41;
+            padding-top: 20px;
+            margin-top: 40px;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .blink {
+            animation: blink 1s linear infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        a {
+            color: #00ff41;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #ffaa00;
+            text-shadow: 0 0 5px rgba(255, 170, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="matrix-bg"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>⚠️ WECHAT SECURITY ADVISORY ⚠️</h1>
+            <div class="subtitle">Contact Method Deprecation Notice</div>
+        </div>
+
+        <div class="warning-box">
+            <p><strong>NOTICE:</strong> WeChat is no longer provided as a public contact method due to significant
+                security and privacy vulnerabilities documented below.</p>
+        </div>
+
+        <div class="section">
+            <h2>📋 Executive Summary</h2>
+            <p>After thorough security analysis and multiple documented incidents, WeChat has been identified as an
+                unsuitable platform for communications. This advisory details the specific vulnerabilities and privacy
+                violations that led to this decision.</p>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Documented Security Incidents</h2>
+
+            <div class="vulnerability-list">
+                <div class="vulnerability-item">
+                    <div class="vuln-title">CVE-EQUIVALENT: Personal Data Exposure via Telegram Social Engineering
+                        Databases</div>
+                    <div class="vuln-desc">
+                        • WeChat user data frequently appears in "social engineering databases" (社工库) on Telegram<br>
+                        • Attackers can perform "doxxing" (开盒) using WeChat numbers to obtain:<br>
+                        &nbsp;&nbsp;- Real names and ID numbers<br>
+                        &nbsp;&nbsp;- Home addresses<br>
+                        &nbsp;&nbsp;- Phone numbers<br>
+                        &nbsp;&nbsp;- Associated accounts
+                    </div>
+                </div>
+
+                <div class="vulnerability-item">
+                    <div class="vuln-title">DATA BREACH: Shanghai Suishenma (随申码) Health Code Leak</div>
+                    <div class="vuln-desc">
+                        • Massive data breach exposing millions of Shanghai residents<br>
+                        • WeChat integration led to correlation of health data with personal identities<br>
+                        • Demonstrated systemic vulnerability in WeChat-integrated government systems
+                    </div>
+                </div>
+
+                <div class="vulnerability-item">
+                    <div class="vuln-title">PRIVACY VIOLATION: Unauthorized Hardware Access in Android</div>
+                    <div class="vuln-desc">
+                        • Documented cases of WeChat accessing camera without user consent<br>
+                        • Microphone activation in background processes<br>
+                        • Continuous location tracking even when "location services" disabled<br>
+                        • Network traffic analysis reveals data transmission to undisclosed servers
+                    </div>
+                </div>
+
+                <div class="vulnerability-item">
+                    <div class="vuln-title">CENSORSHIP ENGINE: Content Manipulation & Surveillance</div>
+                    <div class="vuln-desc">
+                        • Automatic content deletion in WeChat articles (公众号文章)<br>
+                        • Real-time monitoring of Moments (朋友圈) with retroactive content removal<br>
+                        • Account suspension without appeal process<br>
+                        • Keyword filtering affecting private conversations<br>
+                        • Image recognition for "sensitive" content detection
+                    </div>
+                </div>
+                <!-- 
+                <div class="vulnerability-item">
+                    <div class="vuln-title">ARCHITECTURAL FLAW: Message Interception Capability</div>
+                    <div class="vuln-desc">
+                        • End-to-end encryption NOT implemented for standard chats<br>
+                        • Server-side message storage with government access protocols<br>
+                        • Real-time message filtering and analysis<br>
+                        • Chat history accessible to authorities without user notification
+                    </div>
+                </div>
+
+                <div class="vulnerability-item">
+                    <div class="vuln-title">FINANCIAL RISK: WeChat Pay Surveillance</div>
+                    <div class="vuln-desc">
+                        • All transactions monitored and stored indefinitely<br>
+                        • Financial behavior profiling for social credit systems<br>
+                        • Account freezing without prior notice<br>
+                        • Cross-platform data correlation (WeChat + Alipay + Banking)
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="section">
+            <!-- <h2>🔒 Additional Privacy Concerns</h2>
+            
+            <div class="code-block">
+WeChat Privacy Analysis Report:
+├── Data Collection
+│   ├── Contact List: FULL_ACCESS
+│   ├── Call Logs: MONITORED
+│   ├── SMS Messages: READ_ACCESS
+│   ├── App Usage: TRACKED
+│   └── Device Info: FINGERPRINTED
+├── Network Behavior
+│   ├── DNS Queries: LOGGED
+│   ├── Connection Metadata: STORED
+│   └── Traffic Analysis: ACTIVE
+└── Third-party Sharing
+    ├── Government Agencies: UNRESTRICTED
+    ├── Commercial Partners: EXTENSIVE
+    └── Data Brokers: CONFIRMED
+            </div> -->
+
+            <p>Recent security research has also revealed:</p>
+            <ul style="margin-left: 30px; color: #cccccc;">
+                <!-- <li>WeChat Web version vulnerable to XSS attacks</li> -->
+                <li>Mini-programs lacking proper sandboxing</li>
+                <!-- <li>Automatic friend suggestions based on location correlation</li> -->
+                <li>Voice message analysis and transcription without consent</li>
+                <li>Cross-app data sharing with other Tencent products</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📨 My Other Contact Methods</h2>
+
+            <div class="alternative-contact">
+                <div class="contact-method">
+                    <span class="label">Olvid:</span> <a href="../olvid/" target="_blank">Scan the QR code</a>
+                </div>
+
+
+                <div class="contact-method">
+                    <span class="label">Signal:</span>
+                    <a href="../signal/"
+                        target="_blank">
+                        Click here
+                    </a>
+                </div>
+
+                <div class="contact-method">
+                    <span class="label">Telegram:</span>
+                    <a href="../telegram" target="_blank">
+                        Click here
+                    </a>
+                </div>
+
+
+                <!-- 
+                <div class="contact-method">
+                    <span class="label">Bluesky:</span> <a
+                        href="../bluesky/" target="_blank">Bluesky</a>
+                </div> -->
+
+
+                <!-- <div class="contact-method">
+                    <span class="label">Matrix:</span> @yourname:matrix.org
+                </div> -->
+
+                <div class="contact-method">
+                    <!-- 修改：同上 -->
+                    <span class="label">Session:</span> <a href="../session/"
+                        target="_blank">Scan the QR code</a>
+                </div>
+
+                <div class="contact-method">
+                    <!-- 修改：同上 -->
+                    <span class="label">E-mail:</span> <a href="../email/"
+                        target="_blank">OpenPGP</a>
+                </div>
+
+            </div>
+
+            <!-- <p><strong>Note:</strong> All recommended platforms implement proper end-to-end encryption and have undergone independent security audits.</p> -->
+        </div>
+
+        <div class="section">
+            <h2>🛡️ Security Recommendations</h2>
+            <p>For individuals still using WeChat:</p>
+            <pre class="code-block">
+            IMMEDIATE ACTIONS REQUIRED:
+
+            1. Disable location services completely
+            2. Revoke camera and microphone permissions
+            3. Use different phone number for other stuff
+            4. Never share sensitive information via WeChat
+            5. Regularly audit and delete chat history
+            6. Consider complete platform migration
+            </pre>
+
+        </div>
+
+
+
+
+        <div class="footer">
+            <p>This advisory was last updated on <span class="blink">{{ CURRENT_DATE }}</span></p>
+            <p>For verification of these claims, please refer to independent security research and publicly available
+                breach databases.</p>
+            <p><strong>Remember:</strong> Privacy and freedom is not about having something to hide, it's about having
+                something to protect.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some matrix-style animation to the background
+        function createMatrixEffect() {
+            const chars = '01アイウエオカキクケコサシスセソタチツテト';
+            const matrix = document.querySelector('.matrix-bg');
+
+            for (let i = 0; i < 50; i++) {
+                const span = document.createElement('span');
+                span.textContent = chars[Math.floor(Math.random() * chars.length)];
+                span.style.position = 'absolute';
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.fontSize = Math.random() * 20 + 10 + 'px';
+                span.style.animation = `fall ${Math.random() * 10 + 5}s linear infinite`;
+                matrix.appendChild(span);
+            }
+        }
+
+        // Add falling animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                0% { transform: translateY(-100vh); opacity: 1; }
+                100% { transform: translateY(100vh); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize matrix effect
+        createMatrixEffect();
+
+        // Update current date
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentDate = new Date().toISOString().split('T')[0];
+            document.querySelector('.footer .blink').textContent = currentDate;
+        });
+    </script>
+</body>
+
+</html>

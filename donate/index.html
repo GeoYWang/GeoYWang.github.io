@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support My Work - Donate</title>
+    <style>
+        :root {
+            --nyu-violet: #57068c;
+            --ultra-violet: #8900e1;
+            --black: #000000;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-800: #343a40;
+            --gradient-primary: linear-gradient(135deg, var(--nyu-violet), var(--ultra-violet));
+            --gradient-secondary: linear-gradient(135deg, var(--ultra-violet), #a855f7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--black);
+        }
+
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, var(--nyu-violet) 0%, transparent 50%),
+                         radial-gradient(circle at 80% 20%, var(--ultra-violet) 0%, transparent 50%),
+                         radial-gradient(circle at 40% 40%, rgba(137, 0, 225, 0.3) 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-10px, -20px) rotate(1deg); }
+            50% { transform: translate(10px, -10px) rotate(-1deg); }
+            75% { transform: translate(-5px, 10px) rotate(1deg); }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(137, 0, 225, 0.2);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--ultra-violet);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--gradient-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray-200);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Payment Methods Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(137, 0, 225, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--ultra-violet);
+        }
+
+        .payment-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .payment-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Fallback gradient for loading */
+        .payment-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-secondary);
+            z-index: -1;
+        }
+
+        .payment-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .payment-description {
+            color: var(--gray-200);
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(137, 0, 225, 0.2);
+            border: 1px solid var(--ultra-violet);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--ultra-violet);
+        }
+
+        /* QR Code Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--black);
+            border: 1px solid var(--ultra-violet);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-200);
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            /* Remove white background to let the image be the focus */
+            /* background: var(--white); */
+            margin: 1rem auto;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-weight: bold;
+        }
+        
+        .qr-placeholder img {
+             width: 100%;
+             height: 100%;
+             border-radius: 12px;
+             object-fit: contain;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            main {
+                padding: 2rem 1rem;
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hidden class for language switching */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">💎 Donate</div>
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="switchLanguage('zh')">中文</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="content-en">
+            <div class="hero">
+                <h1>Support My Work</h1>
+                <p>Your support helps me continue creating valuable content and maintaining this website. Every contribution, no matter how small, makes a difference and is deeply appreciated.</p>
+            </div>
+
+            <div class="payment-grid">
+                <div class="payment-card" onclick="openPaymentModal('wechat')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://th.bing.com/th/id/OIP.9rIa5GqLyR9Gj3s48uvpggHaHa?w=178&h=180&c=7&r=0&o=5&pid=1.7" alt="WeChat">
+                        </div>
+                        <div class="payment-title">WeChat Pay</div>
+                    </div>
+                    <div class="payment-description">Scan QR code to pay via WeChat</div>
+                    <div class="payment-status">QR Code</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('alipay')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/94/af/a6/94afa683-ab2c-b1df-1368-f4af7f6d792a/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/350x350.png?" alt="Alipay">
+                        </div>
+                        <div class="payment-title">Alipay</div>
+                    </div>
+                    <div class="payment-description">Quick payment via Alipay</div>
+                    <div class="payment-status">QR Code</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('alipayhk')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f4/97/80/f497805e-7cf6-5df3-f6a5-3ee7e4d8271a/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/350x350.png" alt="AlipayHK">
+                        </div>
+                        <div class="payment-title">AlipayHK</div>
+                    </div>
+                    <div class="payment-description">Hong Kong Alipay payment</div>
+                    <div class="payment-status">QR Code</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('unionpay')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/47/bc/36/47bc36ea-f377-bc38-ec9e-c10626863bc7/AppIcon-0-1x_U007emarketing-0-7-0-0-sRGB-85-220-0.png/350x350.png?" alt="UnionPay">
+                        </div>
+                        <div class="payment-title">UnionPay</div>
+                    </div>
+                    <div class="payment-description">China UnionPay payment</div>
+                    <div class="payment-status">QR Code</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('zelle')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4a/a0/c6/4aa0c6d5-acd2-33c1-0b77-9d92cff7dfc0/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/350x350.png?" alt="Zelle">
+                        </div>
+                        <div class="payment-title">Zelle</div>
+                    </div>
+                    <div class="payment-description">US bank transfer via Zelle</div>
+                    <div class="payment-status">QR Code</div> <!-- 修改：將狀態從"Email/Phone"改為"QR Code"，以匹配掃碼方式 -->
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('btc')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f6/5a/65/f65a65ff-6019-de68-a321-1bf6565dc691/AppIcon-0-0-1x_U007epad-0-11-0-sRGB-85-220.png/350x350.png?" alt="Bitcoin">
+                        </div>
+                        <div class="payment-title">Bitcoin</div>
+                    </div>
+                    <div class="payment-description">Cryptocurrency payment (Proton Wallet)</div>
+                    <div class="payment-status">Address</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('paypal')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/06/a3/85/06a385ff-a05d-056f-5b7f-42d77056e825/AppIcon-0-0-1x_U007ephone-0-1-0-GLES2_U002c0-85-220.png/350x350.png?" alt="PayPal">
+                        </div>
+                        <div class="payment-title">PayPal</div>
+                    </div>
+                    <div class="payment-description">Global payment via PayPal</div>
+                    <div class="payment-status">QR Code</div> <!-- 修改：將狀態從"Link"改為"QR Code"，以匹配掃碼方式 -->
+                </div>
+            </div>
+        </div>
+
+        <div id="content-zh" class="hidden">
+            <div class="hero">
+                <h1>支持我的工作</h1>
+                <p>您的支持帮助我继续创造有价值的内容并维护这个网站。每一份贡献，无论大小，都意义重大，我深表感谢。</p>
+            </div>
+
+            <div class="payment-grid">
+                <div class="payment-card" onclick="openPaymentModal('wechat')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://pic.616pic.com/ys_b_img/00/03/77/87xUo7kxQr.jpg" alt="WeChat" >
+                        </div>
+                        <div class="payment-title">微信支付</div>
+                    </div>
+                    <div class="payment-description">扫描二维码通过微信支付</div>
+                    <div class="payment-status">二维码</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('alipay')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/94/af/a6/94afa683-ab2c-b1df-1368-f4af7f6d792a/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/350x350.png?" alt="Alipay">
+                        </div>
+                        <div class="payment-title">支付宝</div>
+                    </div>
+                    <div class="payment-description">通过支付宝快速支付</div>
+                    <div class="payment-status">二维码</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('alipayhk')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f4/97/80/f497805e-7cf6-5df3-f6a5-3ee7e4d8271a/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/350x350.png?" alt="AlipayHK">
+                        </div>
+                        <div class="payment-title">支付寶香港</div>
+                    </div>
+                    <div class="payment-description">支付寶香港捐款</div>
+                    <div class="payment-status">二維碼</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('unionpay')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/47/bc/36/47bc36ea-f377-bc38-ec9e-c10626863bc7/AppIcon-0-1x_U007emarketing-0-7-0-0-sRGB-85-220-0.png/350x350.png?" alt="UnionPay">
+                        </div>
+                        <div class="payment-title">银联</div>
+                    </div>
+                    <div class="payment-description">中国银联支付</div>
+                    <div class="payment-status">二维码</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('zelle')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4a/a0/c6/4aa0c6d5-acd2-33c1-0b77-9d92cff7dfc0/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/350x350.png?" alt="Zelle">
+                        </div>
+                        <div class="payment-title">Zelle</div>
+                    </div>
+                    <div class="payment-description">美国银行转账服务</div>
+                    <div class="payment-status">二维码</div> <!-- 修改：將狀態從"邮箱/手机"改為"二維碼"，以匹配掃碼方式 -->
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('btc')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f6/5a/65/f65a65ff-6019-de68-a321-1bf6565dc691/AppIcon-0-0-1x_U007epad-0-11-0-sRGB-85-220.png/350x350.png?" alt="Bitcoin">
+                        </div>
+                        <div class="payment-title">比特币</div>
+                    </div>
+                    <div class="payment-description">加密货币支付</div>
+                    <div class="payment-status">地址</div>
+                </div>
+
+                <div class="payment-card" onclick="openPaymentModal('paypal')">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/06/a3/85/06a385ff-a05d-056f-5b7f-42d77056e825/AppIcon-0-0-1x_U007ephone-0-1-0-GLES2_U002c0-85-220.png/350x350.png?" alt="PayPal">
+                        </div>
+                        <div class="payment-title">PayPal</div>
+                    </div>
+                    <div class="payment-description">全球PayPal支付</div>
+                    <div class="payment-status">二維碼</div> <!-- 修改：將狀態從"链接"改為"二維碼"，以匹配掃碼方式 -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closePaymentModal()">&times;</span>
+            <h3 id="modal-title">Payment Method</h3>
+            <div id="modal-content">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Define QR code paths
+        const qrCodes = {
+            wechat: 'images/wechat.jpg',
+            alipay: 'images/alipay.JPG',
+            alipayhk: 'images/alipayhk.JPG',
+            unionpay: 'images/unionpay.jpg',
+            btc: 'images/btc.png', // Assuming you might use a .png for crypto
+            zelle: 'images/zelle.JPG', // Although we won't show QR for zelle, keeping the link
+            paypal: 'images/paypal.JPG', // Although we won't show QR for paypal, keeping the link
+        };
+
+        // Language switching
+        function switchLanguage(lang) {
+            const enContent = document.getElementById('content-en');
+            const zhContent = document.getElementById('content-zh');
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            langButtons.forEach(btn => btn.classList.remove('active'));
+            
+            if (lang === 'en') {
+                enContent.classList.remove('hidden');
+                zhContent.classList.add('hidden');
+                document.querySelector('button[onclick="switchLanguage(\'en\')"]').classList.add('active');
+                document.title = 'Support My Work - Donate';
+            } else {
+                enContent.classList.add('hidden');
+                zhContent.classList.remove('hidden');
+                document.querySelector('button[onclick="switchLanguage(\'zh\')"]').classList.add('active');
+                document.title = '支持我的工作 - 捐赠';
+            }
+        }
+
+        // Payment modal handling
+        function openPaymentModal(method) {
+            const modal = document.getElementById('paymentModal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const isZh = document.getElementById('content-zh').classList.contains('hidden') === false;
+
+            let title, content;
+            const qrPath = qrCodes[method];
+
+            // Helper function to generate QR content for common methods
+            const generateQRContent = (title_en, title_zh, desc_en, desc_zh) => `
+                <div class="qr-placeholder">
+                    <img src="${qrPath}" alt="${title_en} QR Code" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <p>${isZh ? desc_zh : desc_en}</p>
+            `;
+
+            switch(method) {
+                case 'wechat':
+                    title = isZh ? '微信支付' : 'WeChat Pay';
+                    content = generateQRContent(
+                        'WeChat Pay', '微信支付',
+                        'Please scan the QR code above with WeChat to pay.', 
+                        '请使用微信扫描上方二维码进行支付。'
+                    );
+                    break;
+                case 'alipay':
+                    title = isZh ? '支付宝' : 'Alipay';
+                    content = generateQRContent(
+                        'Alipay', '支付宝',
+                        'Please scan the QR code above with Alipay to pay.', 
+                        '请使用支付宝扫描上方二维码进行支付。'
+                    );
+                    break;
+                case 'alipayhk':
+                    title = isZh ? '' : 'AlipayHK';
+                    content = generateQRContent(
+                        'AlipayHK', '支付寶香港',
+                        'Please scan the QR code above with AlipayHK to pay.',
+                        '請使用支付寶香港掃描上方二維碼進行捐款。'
+                    );
+                    break;
+                case 'unionpay':
+                    title = isZh ? '银联' : 'UnionPay';
+                    content = generateQRContent(
+                        'UnionPay', '银联',
+                        'Please scan the QR code above with UnionPay app.',
+                        '请使用云闪付或银联APP扫描上方二维码。'
+                    );
+                    break;
+
+                // 修改：將Zelle改為QR碼顯示，使用generateQRContent函數，添加掃描說明文字
+                case 'zelle':
+                    title = isZh ? 'Zelle' : 'Zelle';
+                    content = generateQRContent(
+                        'Zelle', 'Zelle',
+                        'Please scan the QR code above with your Zelle app to pay.',
+                        '請使用Zelle應用掃描上方二維碼進行支付。'
+                    );
+                    break;
+
+                case 'btc':
+                    title = isZh ? '比特币 (BTC)' : 'Bitcoin (BTC)';
+                    content = `
+                        <div style="padding: 2rem; background: rgba(137, 0, 225, 0.1); border-radius: 12px; margin: 1rem 0;">
+                            <div class="qr-placeholder" style="width: 150px; height: 150px; margin: 0.5rem auto;">
+                                <img src="https://geoywang.github.io/donate/images/bitcoin.png" alt="Bitcoin QR Code">
+                            </div>
+                            <h4>${isZh ? 'Bitcoin 地址' : 'Bitcoin Address'}</h4>
+                            <p style="margin: 1rem 0; word-break: break-all; font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-size: 0.8rem;">
+                                bc1qg2gkh9zc3pzg5amp7gmc24jxd9mlufc4laexam
+                            </p>
+                            <p style="font-size: 0.9em; color: var(--gray-200);">
+                                ${isZh ? '请扫描二维码或复制上述地址到您的钱包应用中进行转账。' : 'Please scan the QR or copy the address above to your wallet app for transfer.'}
+                            </p>
+                        </div>
+                    `;
+                    break;
+                // 修改：將PayPal改為QR碼顯示，使用generateQRContent函數，添加掃描說明文字（移除原連結按鈕）
+                case 'paypal':
+                    title = isZh ? 'PayPal' : 'PayPal';
+                    content = generateQRContent(
+                        'PayPal', 'PayPal',
+                        'Please scan the QR code above with PayPal to pay.',
+                        '請使用PayPal掃描上方二維碼進行支付。'
+                    );
+                    break;
+            }
+
+            modalTitle.textContent = title;
+            modalContent.innerHTML = content;
+            modal.style.display = 'block';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePaymentModal();
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if URL contains zh-CN to set default language
+            if (window.location.pathname.includes('zh-CN')) {
+                switchLanguage('zh');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="icon"
+        href="https://play-lh.googleusercontent.com/EyZzBivWAT_6dFOiIZ9JwuyE8duosWa98oDXe46yVUqMMTp07b0JVdmJEYxMrRWXzl1K=w240-h480-rw"
+        type="image/png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --c1: #00d4ff;
+            --c2: #0077ff;
+            --c3: #00ffa6;
+            --bg: #020617;
+            --panel: rgba(5, 15, 40, 0.85);
+        }
+
+        body {
+            background: var(--bg);
+            color: #b6e3ff;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 140, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 140, 255, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .scanline {
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.15) 2px,
+                    rgba(0, 0, 0, 0.15) 4px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .circuit-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .circuit-line::before,
+        .circuit-line::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--c2), var(--c1), transparent);
+        }
+
+        .circuit-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--c1);
+            box-shadow: 0 0 10px var(--c1), 0 0 20px var(--c1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 10px var(--c1), 0 0 20px var(--c1);
+            }
+
+            50% {
+                opacity: 0.5;
+                box-shadow: 0 0 4px var(--c1);
+            }
+        }
+
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow:
+                0 0 40px rgba(0, 212, 255, 0.8),
+                0 0 80px rgba(0, 119, 255, 0.4);
+            margin-bottom: 8px;
+            animation: glitch 8s infinite;
+        }
+
+        .title span {
+            color: var(--c1);
+            text-shadow:
+                0 0 40px rgba(0, 212, 255, 0.9),
+                0 0 80px rgba(0, 119, 255, 0.5);
+        }
+
+        .subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: rgba(0, 180, 255, 0.7);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 12px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid rgba(0, 140, 255, 0.35);
+            border-radius: 2px;
+            padding: 28px 32px;
+            margin-bottom: 20px;
+            position: relative;
+            backdrop-filter: blur(8px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20px;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--c2), var(--c1));
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: 20px;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--c1), var(--c2));
+        }
+
+        .card-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(0, 180, 255, 0.7);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-label::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--c1);
+            transform: rotate(45deg);
+        }
+
+        .email-display {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(18px, 3vw, 26px);
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .email-at-badge {
+            background: rgba(0, 212, 255, 0.12);
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            border-radius: 2px;
+            padding: 2px 10px;
+            font-size: 20px;
+            color: var(--c1);
+        }
+
+        .fingerprint-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .fingerprint-value {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: #7dd3fc;
+            letter-spacing: 0.12em;
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .fingerprint-value .chunk {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .fingerprint-value .chunk:nth-child(odd) {
+            color: #38bdf8;
+        }
+
+        .fingerprint-value .chunk:nth-child(even) {
+            color: #0ea5e9;
+        }
+
+        .status-badge {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            padding: 4px 12px;
+            border: 1px solid rgba(0, 255, 160, 0.5);
+            color: #00ffa0;
+            background: rgba(0, 255, 160, 0.08);
+            border-radius: 2px;
+            white-space: nowrap;
+            animation: blink-border 3s ease-in-out infinite;
+        }
+
+        @keyframes blink-border {
+
+            0%,
+            100% {
+                border-color: rgba(0, 255, 160, 0.5);
+            }
+
+            50% {
+                border-color: rgba(0, 255, 160, 0.15);
+            }
+        }
+
+        .pgp-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 140, 255, 0.12);
+            border: 1px solid rgba(0, 140, 255, 0.3);
+            border-bottom: none;
+            padding: 8px 16px;
+        }
+
+        .pgp-header-bar span {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: rgba(0, 180, 255, 0.8);
+            letter-spacing: 0.15em;
+        }
+
+        .copy-btn {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            background: transparent;
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            color: var(--c1);
+            padding: 4px 14px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            color: #fff;
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .pgp-box {
+            background: rgba(2, 6, 23, 0.95);
+            border: 1px solid rgba(0, 140, 255, 0.3);
+            border-top: none;
+            padding: 20px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11.5px;
+            color: #93c5fd;
+            max-height: 320px;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+
+        .pgp-begin,
+        .pgp-end {
+            color: var(--c1);
+            font-weight: bold;
+        }
+
+        .footer-line {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(0, 140, 255, 0.15);
+        }
+
+        .footer-line span {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: rgba(0, 140, 255, 0.4);
+        }
+
+        .footer-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.5);
+        }
+
+        .corner-tl {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 12px;
+            height: 12px;
+            border-top: 2px solid var(--c2);
+            border-left: 2px solid var(--c2);
+        }
+
+        .corner-br {
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 12px;
+            height: 12px;
+            border-bottom: 2px solid var(--c1);
+            border-right: 2px solid var(--c1);
+        }
+
+        @keyframes glitch {
+
+            0%,
+            100% {
+                clip-path: none;
+                transform: none;
+            }
+
+            93% {
+                clip-path: inset(20% 0 60% 0);
+                transform: translate(-3px, 0);
+            }
+
+            94% {
+                clip-path: inset(60% 0 10% 0);
+                transform: translate(3px, 0);
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+
+    <div class="container">
+
+        <div class="header">
+            <div class="circuit-line">
+                <div class="circuit-dot"></div>
+            </div>
+            <div class="title">SECURE<span>CONTACT</span></div>
+            <div class="subtitle">// end-to-end encrypted communications //</div>
+        </div>
+
+        <div class="card">
+            <div class="corner-tl"></div>
+            <div class="corner-br"></div>
+            <div class="card-label">primary address</div>
+            <div class="email-display">
+                <span>geo.wang</span>
+                <span class="email-at-badge">@</span>
+                <span>nyu.edu</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="corner-tl"></div>
+            <div class="corner-br"></div>
+            <div class="card-label">key fingerprint</div>
+            <div class="fingerprint-row">
+                <div class="fingerprint-value" id="fingerprint-display">
+                    <span class="chunk">C424</span><span class="chunk">31A9</span><span class="chunk">69D8</span>
+                    <span class="chunk">B71F</span>
+                    <span class="chunk">87E1</span><span class="chunk">B883</span><span class="chunk">B742</span>
+                    <span class="chunk">1BA8</span><span class="chunk">D3F9</span><span class="chunk">BCBA</span>
+                </div>
+                <div class="status-badge">✦ VALID</div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="corner-tl"></div>
+            <div class="corner-br"></div>
+            <div class="card-label">pgp public key</div>
+
+            <div class="pgp-wrapper">
+                <div class="pgp-header-bar">
+                    <span>RSA-4096 · OpenPGP</span>
+                    <button class="copy-btn" id="copyBtn" onclick="copyKey()">
+                        <svg class="copy-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4 2h8a2 2 0 012 2v9a1 1 0 01-1 1H5a2 2 0 01-2-2V3a1 1 0 011-1zm1 1v9a1 1 0 001 1h8V4a1 1 0 00-1-1H5z" />
+                            <path d="M2 4v9a1 1 0 001 1h1v1H3a2 2 0 01-2-2V4h1z" />
+                        </svg>
+                        <span id="copyLabel">COPY KEY</span>
+                    </button>
+                </div>
+                <div class="pgp-box" id="pgpContent">
+                    <span class="pgp-begin">-----BEGIN PGP PUBLIC KEY BLOCK-----</span>
+                    <span class="pgp-body">
+                        xsDNBGnsP9UBDACwA+UxNw9snkCThXDzWwwv1sqKWIL0R9KYEulYIdWj97DaZhQC
+                        xOYED6oE0kd+QyndR7pdt7MOf+pCqM1V9SesZHA6wgZNqo3zNn8PSDRJCENgaFC4
+                        pwJKvBJNkCMQyIcAp1ZjIYpNDl4F6IB1cXXaH3OqHMaUgyAqWMS7lAz1QFrG1r5J
+                        C/aNWwzLaU8vs+B6i6qjPOGHyfyVE+A6S9npz9BAosXPp7TElIt2a1WmcRxjiaO7
+                        +984YPTQWbFm5styAeWjd5n+7cxZ7EQrfjM7NIiyEvhBWM4zsUB2eMy77oeDS975
+                        eDidx7kJrQhcZDAbtySwoy5cExYAdJ2jmOGrvBOzqE0rw0+OOH0xI2waVWlMYjZ5
+                        Ne/nBygES6o0aFAt2IjP1vP+7GEvD6i3rKOpHyi8yphUdzsR1y322W/SSyp7mWFW
+                        y86RDbSg+roqAZn31CxR/BCFckvBJayKvIt2QYOIKMQGoVj85FGchsO45naqQAAq
+                        bR7RLOsjclEXe4UAEQEAAc0bR2VvIFdhbmcgPGdlby53YW5nQG55dS5lZHU+wsEH
+                        BBMBCAAxFiEExCQxqWnYtx+H4biDt0IbqNP5vLoFAmnsP9YCGwMECwkIBwUVCAkK
+                        CwUWAgMBAAAKCRC3Qhuo0/m8ukVYC/4xtmXUOc83flEH9cE+G6Ab9Ln5AOPyuE93
+                        npc0zJSC/yguvIMtVCkhgpLDBcAXgxGgYGuE3Bhe27tVDnRoeoJ0HlCQfPEFFbt1
+                        d5iD1IBqXJm8bjIevAVTKr/V52SdrV7X+SiNBagkSFFgsHeAaE69KJHoWz3/3dP6
+                        6qhtjaikXquDwpLnmMEddbE6VgyLLZ4hz0upH65XmnizAA053bmc+CZ+QHSSCuUf
+                        O2mWIIhreVfXLQJu2RGeK4po7/CUWpBxMh6AQm/2kaa62eruntuRHkPt2uhXhFoI
+                        Btm4H0/sQ2t09v324fP2ifKJDrFEZR0Pb8J6GKGRFvRGnTip324eCWH+9ixDEBeT
+                        8myvnB2AqcnWUcqd3+sK1LI8LcswclbdwNFCJZypidtuZdLEXeXnEj+oMtE9TeH6
+                        EuYxdpJmOUYaAfySNO0afhzSHePc5LPhc8gUzlEH2nY6Cx/W3t2tVQrfWgywH7gD
+                        bANvqfcU0T4PkAudNEKKDcoTzLDbb5rOwM0Eaew/1gEMALcCp4p8ZJrA8eebi8Ms
+                        RteYFkiu/oW/AI5R1sJfMDHN1OgUJk/58+cICmpFI/n+otwLEDcKza+77fPwvCNl
+                        lHxzY4v+YJGTcMqUJQIjnsh9SPGSeVccyDD4fadqEhpX7I7VE0Tu/3S9AJ/oA065
+                        Q4CsLws8EXADkNir89lDTakR+uXH093xCLxhFx1Mx56nPmc97BIjEVxjCnV9Jfq8
+                        jhq9kgorKJKJ8dDCv7W7vfdTyRnD3aBI7tc2H8qhrUZ44K/RnyAxki2hBbXcPvzf
+                        Fohkf4F7bq0nkbRAX0N6nHBmMloOVkoVwseCoszSznCnnIlyLLog2dsHsEd4qh3F
+                        xeWA9lO0NPhS6W7FfBw2y63FftG1EzF979nZdgTkmjSm1nwnzy+9zcLpPuVFBg3U
+                        ZaDPSgq5o8eGAzCmqiLfdLPlZEqq6zQ5OfaM64gdt/n44az9cwHF2CU9tA+uz+7V
+                        8QMDjhqPsg/KuK1O1AKhpZLNkKgO39R1SHc8B4N5lC0WWQARAQABwsD2BBgBCAAg
+                        FiEExCQxqWnYtx+H4biDt0IbqNP5vLoFAmnsP9cCGwwACgkQt0IbqNP5vLq0hAv6
+                        A4Sv2exzOG9nR2p95lO59qYUXQcoxYrN3NHHHzIEssZaI+0P8uex55/hqGKpwLLY
+                        Ipszkaf7ISWU57nYlqP3YfwZ8pbK1IthzOC6mpzw1njhqwQRTt9kBpkDcBTMbtzC
+                        OzTEHgmY9EleNaBG9zHHmE+v9fAcrFpigtwEbPQDu0PKO9/+ipNdIR4H8b652BDY
+                        IEl4l+P9QyHbCfBMzrRkfDzMRjXoNn0adtbDvCGGPipIUP8ZTVZnKzlRBLfLImrG
+                        7Eu5HNpx1sQbUIdOcBCcYd90AhWLrJR60/Y2gsw9s9/OnXw7QL+Etlyb/MCiGKWa
+                        m6TuKkuLA+T00NhxgtXEtHjYK8IEqCzXO2fDNGSEQ5Sey/f7e4d/XDwfbIRLFlJS
+                        NTzv2Ffa+HYTK1Ez6PTSyOAaVTVqn3WRs55G+zqVC4zgSqbCP4LXbfwF2QrQIL3w
+                        7JDJ4YeR8e/dGQP6BKYlClrDYhuiV6PLljs2+S9c3M5G8zoQAuvDuPAa0Jly/D9T
+                        =+r1P
+                    </span>
+                    <span class="pgp-end">-----END PGP PUBLIC KEY BLOCK-----</span>
+                </div>
+            </div>
+
+            <div class="how-to-section" style="margin-top: 20px;">
+                <button class="how-to-toggle" id="howToBtn" onclick="toggleHowTo()">
+                    <span class="arrow">▶</span>
+                    HOW TO SEND ENCRYPTED MAIL
+                </button>
+                <div class="how-to-body" id="howToBody">
+                    <ol>
+                        <li>Copy the public key above and import it into your PGP client (e.g. <code>GPG Suite</code>,
+                            <code>Kleopatra</code>, <code>Thunderbird + Enigmail</code>).</li>
+                        <li>Run: <code>gpg --import &lt;keyfile&gt;</code></li>
+                        <li>Verify the fingerprint matches what is displayed above before trusting the key.</li>
+                        <li>Encrypt your message with this public key and send it to <code>geo.wang@nyu.edu</code>.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-line">
+            <span>privacy is not a crime</span>
+            <div class="footer-dot"></div>
+            <span>隱私不是犯罪</span>
+            <div class="footer-dot"></div>
+            <span>e2ee always</span>
+        </div>
+
+    </div>
+
+    <script>
+        const pgpText = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGXampleKeyBEAAr7Q1nP3bWtZKtYs9vQx2m8qLqUj9wD+J7A3vZrWkP
+kGHfT5mN1o8jXpY6qLz3dCwR4bVnMU0sE7yHtF2lGmDkNcIvPaJ5sOuQBwX
+9fEzR6hkYT3mPcLNe4VpUAo8GrBqXZ7wJtHdMfS2lKy0nCvIxRbDgE5aFomP
+YJq3sUcThNzOWvLpRdXkB6iMgHe9fC1ZQy4ruEwT7PmNsDkVbA0JcFGtHxIq
+LzWnURdOaE5KvBJ2mPgCh8NfT1kYseQ4uXDzRbSAoMlJ7vIpEy3wGcHN6tFP
+KrBmLQdXjzOAeW9sTfUh1iYCvp4nmRE8gDlN0bVKyPcJuQoHsM3ZfTwAxLq6
+rBgICtEpOdV2hY7nFKsMX1wJzRuQP4bNlHfTeGAoV9sDk3mCiEyJpXBqLR5g
+OtUhNfeMaWcTvP2bYIDksKLQz7uXjpF3ngH1mCe6oRdBNWsTYv4AlqZMXfJP
+uE9KGbRc0wHnOmVTpgQsDF3IAeLz5YkhXBNjU7oMfPRcTIqWvs1EeAdCHg4n
+bSdKFprQm8YXzw2JLUt0cBNqVPeA6RsDhMikyEo3GTfJ9lZpuXCbNnHvwrOT
+1FQmZe8ASVkBgdoEp7RcYINf6XjsUqTwDnvM3h2LPbeHAaK5FGlm9oQ=
+=RYpT
+-----END PGP PUBLIC KEY BLOCK-----`;
+
+        function copyKey() {
+            navigator.clipboard.writeText(pgpText).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const label = document.getElementById('copyLabel');
+                btn.classList.add('copied');
+                label.textContent = 'COPIED ✓';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    label.textContent = 'COPY KEY';
+                }, 2500);
+            });
+        }
+
+        function toggleHowTo() {
+            const btn = document.getElementById('howToBtn');
+            const body = document.getElementById('howToBody');
+            btn.classList.toggle('open');
+            body.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>
