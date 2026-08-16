@@ -27,8 +27,8 @@ jobs:
           echo "geo.is-a.dev" > CNAME
 
           git init -b main
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "GeoYWang"
+          git config user.email "208766262+GeoYWang@users.noreply.github.com"
           git add -A
           git commit -m "Sync from GeoYWang.github.io@${GITHUB_SHA::7}"
           git push --force \
