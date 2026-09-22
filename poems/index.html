@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geo Wang's Poems</title>
-    <link rel="icon" href="./NYU.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="./NYU.png">
-    <meta name="msapplication-TileImage" content="./NYU.png">
+    <link rel="icon" href="/NYU.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/NYU.png">
+    <meta name="msapplication-TileImage" content="/NYU.png">
     <style>
         * {
             margin: 0;
@@ -14,44 +14,58 @@
             box-sizing: border-box;
         }
 
-        /* CSS变量 - 浅色模式 */
+        /* NYU 色票 - 淺色模式 */
         :root {
-            --bg-gradient-start: #f5f1e8;
-            --bg-gradient-end: #e8f4f0;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(100, 150, 130, 0.2);
-            --card-shadow: rgba(0, 0, 0, 0.08);
-            --text-primary: #2c3e50;
-            --text-secondary: #546e7a;
-            --text-muted: #90a4ae;
-            --accent-color: #4a7c59;
-            --accent-light: #6b9b7f;
-            --title-color: #1e3932;
-            --quote-color: #95a5a6;
-            --toggle-bg: #2c3e50;
-            --toggle-icon: #f39c12;
+            --bg-gradient-start: #eee6f3;
+            --bg-gradient-end: #f2f2f2;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-border: rgba(171, 130, 197, 0.35);
+            --card-shadow: rgba(51, 6, 98, 0.08);
+            --text-primary: #404040;
+            --text-secondary: #6d6d6d;
+            --text-muted: #6d6d6d;
+            --accent-color: #57068c;
+            --accent-light: #7b5aa6;
+            --title-color: #330662;
+            --quote-color: #7b5aa6;
+            --toggle-bg: #57068c;
+            --toggle-icon: #ffffff;
         }
 
-        /* 深色模式变量 */
+        /* NYU 色票 - 深色模式 */
         [data-theme="dark"] {
-            --bg-gradient-start: #1a1625;
-            --bg-gradient-end: #2d1b3d;
-            --card-bg: rgba(40, 30, 50, 0.8);
-            --card-border: rgba(139, 107, 165, 0.3);
-            --card-shadow: rgba(0, 0, 0, 0.3);
-            --text-primary: #e8dff5;
-            --text-secondary: #c4b5d4;
-            --text-muted: #9381a8;
-            --accent-color: #d4af37;
-            --accent-light: #f0d078;
-            --title-color: #f0d078;
-            --quote-color: #8b6ba5;
-            --toggle-bg: #f0d078;
-            --toggle-icon: #2d1b3d;
+            --bg-gradient-start: #1a0333;
+            --bg-gradient-end: #330662;
+            --card-bg: rgba(51, 6, 98, 0.6);
+            --card-border: rgba(171, 130, 197, 0.3);
+            --card-shadow: rgba(0, 0, 0, 0.35);
+            --text-primary: #eee6f3;
+            --text-secondary: #d6d6d6;
+            --text-muted: #b8b8b8;
+            --accent-color: #ab82c5;
+            --accent-light: #eee6f3;
+            --title-color: #eee6f3;
+            --quote-color: #ab82c5;
+            --toggle-bg: #eee6f3;
+            --toggle-icon: #57068c;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--accent-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
         }
 
         body {
-            font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+            font-family: 'Noto Serif TC', 'Songti TC', 'PMingLiU', 'Noto Serif SC', 'STSong', serif;
             background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             color: var(--text-primary);
             min-height: 100vh;
@@ -289,6 +303,7 @@
             <h1 class="page-title">詩集</h1>
             <p class="page-quote"><i>We all write poems; it is simply that poets are the ones who write in words. --John Fowles</i></p>
             <p class="page-description">This page presents some Chinese traditional poems written by me.</p>
+            <a class="back-link" href="/">← Geo Wang</a>
         </header>
 
         <!-- 诗歌列表 -->

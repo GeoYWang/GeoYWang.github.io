@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="fr" class="no-js">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Geo Wang – Mathematics Student</title>
+	<title>Geo Wang – Étudiant en mathématiques</title>
 	<style>
         :root {
             --nyu-violet: #57068c;
@@ -265,13 +265,13 @@
 		<p class="site-title">
 			<a href="/" rel="home">Geo Wang</a>
 		</p>
-		<p class="site-description">Mathematics Student</p>
+		<p class="site-description">Étudiant en mathématiques</p>
 		<nav class="lang-nav">
-			<a href="/en/" lang="en" aria-current="page">English</a>
+			<a href="/en/" lang="en">English</a>
 			<a href="/zh-TW/" lang="zh-TW">中文</a>
 			<a href="/wuu/" lang="wuu-Hant">上海話</a>
 			<a href="/ja/" lang="ja">日本語</a>
-			<a href="/fr/" lang="fr">Français</a>
+			<a href="/fr/" lang="fr" aria-current="page">Français</a>
 		</nav>
 	</header>
 
@@ -280,13 +280,14 @@
 			<main id="main" class="site-main">
 				<article class="hentry">
 					<header class="entry-header">
-						<h1 class="entry-title">About Me & Open-Source Projects</h1>
+						<h1 class="entry-title">À propos de moi & projets open source</h1>
 					</header>
 
 					<div class="entry-content">
 						<section class="intro-section">
-							<p>I'm <strong>Geo Wang</strong>, a Mathematics student at NYU. I love building tools that solve real-world problems, and I develop, maintain and publish open-source Android apps for the F-Droid ecosystem.</p>
-							<p style="margin-top: 1.5rem;">Beyond coding, I have a strong inclination towards traditional Chinese poetry (see my <a href="/poems/" target="_blank">poems</a>) and I'm a disciple of Friedrich Hayek and the Austrian school of economics (see my <a href="https://blog.lanticy.dpdns.org" target="_blank">blog</a>).</p>
+							<p class="quote">Se connaître soi-même est le commencement de toute sagesse. — Aristote</p>
+							<p>Je m'appelle <strong>Geo Wang</strong>, originaire de Shanghai, étudiant en mathématiques à NYU. J'aime concevoir des outils qui résolvent des problèmes concrets, et je développe, maintiens et publie des applications Android open source pour l'écosystème F-Droid. En dehors des maths, je m'intéresse aussi à la chimie.</p>
+							<p style="margin-top: 1.5rem;">En dehors du code, j'ai un goût prononcé pour la poésie chinoise classique (voir mes <a href="/poems/" target="_blank">poèmes</a>) et je suis un disciple de Friedrich Hayek et de l'école autrichienne d'économie (voir mon <a href="https://blog.lanticy.dpdns.org" target="_blank">blog</a>).</p>
 
 							<div class="tech-stack">
 								<span class="tech-badge">Python</span>
@@ -303,149 +304,149 @@
 
 						<section class="projects-section">
 							<div class="project-category">
-								<h2 class="section-title">🔬 Research</h2>
+								<h2 class="section-title">🔬 Recherche</h2>
 
 								<div class="project-item">
 									<h3><a href="https://doi.org/10.5281/zenodo.22773064" target="_blank">Kinematic Analysis of Elytra Flight as a Discrete Dynamical System: Energy Injection and Perpetual Motion in Minecraft Physics</a></h3>
-									<div class="tags"><span class="tag status">Preprint</span><span class="tag">Applied Math</span><span class="tag">Python</span></div>
-									<p class="project-description">Modeled Minecraft's Elytra flight as a 20 Hz discrete dynamical system and derived closed-form fixed points for both gliding and climbing. Proved analytically that θ = 0° is the globally optimal pitch, with an exact asymptotic glide ratio of 495/49 ≈ 10.102 : 1, and showed global linear convergence (ρ = 0.99) via the Jacobian's eigenvalues. Asymmetric momentum-transfer coefficients reveal a net energy-injection mechanism worth +3.66 blocks of height per cycle.</p>
-									<p class="project-links"><a href="https://doi.org/10.5281/zenodo.22773064" target="_blank">DOI: 10.5281/zenodo.22773064</a><a href="https://gitlab.com/geoywang/elytra-flight" target="_blank">Source</a></p>
+									<div class="tags"><span class="tag status">Prépublication</span><span class="tag">Applied Math</span><span class="tag">Python</span></div>
+									<p class="project-description">Modélisation du vol en élytres de Minecraft comme un système dynamique discret à 20 Hz, avec des points fixes sous forme close pour le plané et la montée. Démonstration analytique que θ = 0° est l'angle de tangage optimal global, avec un rapport de plané asymptotique exact de 495/49 ≈ 10,102 : 1, et preuve de la convergence linéaire globale (ρ = 0,99) via les valeurs propres de la jacobienne. Les coefficients asymétriques de transfert de quantité de mouvement révèlent une injection nette d'énergie de +3,66 blocs d'altitude par cycle.</p>
+									<p class="project-links"><a href="https://doi.org/10.5281/zenodo.22773064" target="_blank">DOI: 10.5281/zenodo.22773064</a><a href="https://gitlab.com/geoywang/elytra-flight" target="_blank">Code source</a></p>
 								</div>
 							</div>
 
 							<div class="project-category">
-								<h2 class="section-title">🌐 Web & Network Tools</h2>
+								<h2 class="section-title">🌐 Outils web & réseau</h2>
 
 								<div class="project-item">
 									<h3><a href="https://gitlab.com/HydrofluoricAcid/dns" target="_blank">DoH Proxy Pro</a></h3>
 									<div class="tags"><span class="tag">Cloudflare Workers</span><span class="tag">JavaScript</span><span class="tag">DNS-over-HTTPS</span></div>
-									<p class="project-description">A high-performance DNS-over-HTTPS resolver on Cloudflare Workers that races queries in parallel across 10 upstream resolvers, with circuit breaking, geo-selection and adaptive scoring to minimize latency and keep lookups reliable.</p>
-									<p class="project-links"><a href="https://gitlab.com/HydrofluoricAcid/dns" target="_blank">Source</a></p>
+									<p class="project-description">Un résolveur DNS-over-HTTPS haute performance sur Cloudflare Workers, qui met en concurrence 10 résolveurs en amont en parallèle, avec disjoncteur, sélection géographique et score adaptatif pour réduire la latence et fiabiliser les résolutions.</p>
+									<p class="project-links"><a href="https://gitlab.com/HydrofluoricAcid/dns" target="_blank">Code source</a></p>
 								</div>
 								<div class="project-item">
 									<h3><a href="https://github.com/AcideFluorhydrique/google-proxy" target="_blank">Google Proxy</a></h3>
 									<div class="tags"><span class="tag">Vercel</span></div>
-									<p class="project-description">A one-click Vercel deployment of a Google mirror service, with a ~100 kB first paint.</p>
-									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/google-proxy" target="_blank">Source</a></p>
+									<p class="project-description">Un service miroir de Google déployable en un clic sur Vercel, avec un premier affichage d'environ 100 ko.</p>
+									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/google-proxy" target="_blank">Code source</a></p>
 								</div>
 							</div>
 
 							<div class="project-category">
-								<h2 class="section-title">🛠️ Desktop Tools</h2>
+								<h2 class="section-title">🛠️ Outils de bureau</h2>
 
 								<div class="project-item">
 									<h3><a href="https://github.com/AcideFluorhydrique/OpenRouter-Chat-Assist" target="_blank">OpenRouter Chat Assist</a></h3>
 									<div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span></div>
-									<p class="project-description">A Python/Tkinter desktop client that connects to various LLMs through the OpenRouter API, built for users in restricted regions.</p>
-									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/OpenRouter-Chat-Assist" target="_blank">Source</a></p>
+									<p class="project-description">Un client de bureau Python/Tkinter qui se connecte à divers LLM via l'API OpenRouter, conçu pour les utilisateurs des régions restreintes.</p>
+									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/OpenRouter-Chat-Assist" target="_blank">Code source</a></p>
 								</div>
 								<div class="project-item">
 									<h3><a href="https://codeberg.org/lanticy/Watermarking-Mini-Program" target="_blank">Watermarking Mini Program</a></h3>
 									<div class="tags"><span class="tag">Python</span></div>
-									<p class="project-description">A portable app for adding watermarks to photos.</p>
-									<p class="project-links"><a href="https://codeberg.org/lanticy/Watermarking-Mini-Program" target="_blank">Source</a></p>
+									<p class="project-description">Une application portable pour ajouter des filigranes aux photos.</p>
+									<p class="project-links"><a href="https://codeberg.org/lanticy/Watermarking-Mini-Program" target="_blank">Code source</a></p>
 								</div>
 							</div>
 
 							<div class="project-category">
-								<h2 class="section-title">🧩 Browser Extensions</h2>
+								<h2 class="section-title">🧩 Extensions de navigateur</h2>
 
 								<div class="project-item">
 									<h3><a href="https://codeberg.org/lanticy/cBlock" target="_blank">cBlock Origin</a></h3>
 									<div class="tags"><span class="tag">JavaScript</span><span class="tag">WebExtensions</span></div>
-									<p class="project-description">uBlock Origin adapted for mainland China networks: custom filter-list mirrors (cAssets), CDN reachability handling, and rule updates and filtering performance tuned for local network conditions.</p>
-									<p class="project-links"><a href="https://codeberg.org/lanticy/cBlock" target="_blank">Source</a><a href="https://addons.mozilla.org/firefox/addon/cblock-origin/" target="_blank">Add-on</a></p>
+									<p class="project-description">uBlock Origin adapté aux réseaux de Chine continentale : miroirs de listes de filtres personnalisés (cAssets), gestion de l'accessibilité des CDN, mise à jour des règles et performances de filtrage optimisées pour les conditions locales.</p>
+									<p class="project-links"><a href="https://codeberg.org/lanticy/cBlock" target="_blank">Code source</a><a href="https://addons.mozilla.org/firefox/addon/cblock-origin/" target="_blank">Module</a></p>
 								</div>
 								<div class="project-item">
 									<h3><a href="https://codeberg.org/lanticy/Twitter-IP-Region-Display" target="_blank">Twitter IP Region Display</a></h3>
 									<div class="tags"><span class="tag">JavaScript</span><span class="tag">GraphQL</span><span class="tag">WebExtensions</span></div>
-									<p class="project-description">A Firefox extension that intercepts X's internal GraphQL API to show each user's IP region inline on the timeline, with a 24-hour local cache, custom labels, and zero server-side data collection.</p>
-									<p class="project-links"><a href="https://codeberg.org/lanticy/Twitter-IP-Region-Display" target="_blank">Source</a><a href="https://addons.mozilla.org/firefox/addon/twitter-ip-region-display/" target="_blank">Add-on</a></p>
+									<p class="project-description">Une extension Firefox qui intercepte l'API GraphQL interne de X pour afficher la région IP de chaque utilisateur directement dans le fil, avec un cache local de 24 heures, des libellés personnalisés et aucune collecte de données côté serveur.</p>
+									<p class="project-links"><a href="https://codeberg.org/lanticy/Twitter-IP-Region-Display" target="_blank">Code source</a><a href="https://addons.mozilla.org/firefox/addon/twitter-ip-region-display/" target="_blank">Module</a></p>
 								</div>
 								<div class="project-item">
 									<h3><a href="https://codeberg.org/lanticy/Chrome-Simulator" target="_blank">Chrome Simulator</a></h3>
 									<div class="tags"><span class="tag">JavaScript</span><span class="tag">WebExtensions</span></div>
-									<p class="project-description">A Firefox add-on (forked from Chrome Mask) that helps Chrome-only websites work correctly on Firefox.</p>
-									<p class="project-links"><a href="https://codeberg.org/lanticy/Chrome-Simulator" target="_blank">Source</a><a href="https://addons.mozilla.org/firefox/addon/chrome-simulator/" target="_blank">Add-on</a></p>
+									<p class="project-description">Un module Firefox (fork de Chrome Mask) qui permet aux sites réservés à Chrome de fonctionner correctement sous Firefox.</p>
+									<p class="project-links"><a href="https://codeberg.org/lanticy/Chrome-Simulator" target="_blank">Code source</a><a href="https://addons.mozilla.org/firefox/addon/chrome-simulator/" target="_blank">Module</a></p>
 								</div>
 							</div>
 
 							<div class="project-category">
-								<h2 class="section-title">📱 Android Apps</h2>
+								<h2 class="section-title">📱 Applications Android</h2>
 
 								<div class="project-item">
 									<h3><a href="https://codeberg.org/lanticy/guandan" target="_blank">Guandan</a></h3>
 									<div class="tags"><span class="tag">Kotlin</span><span class="tag">Android</span></div>
-									<p class="project-description">The four-player Chinese card game Guandan over local Wi-Fi — no server, no account.</p>
-									<p class="project-links"><a href="https://codeberg.org/lanticy/guandan" target="_blank">Source</a></p>
+									<p class="project-description">Le jeu de cartes chinois Guandan à quatre joueurs, en Wi-Fi local — sans serveur ni compte.</p>
+									<p class="project-links"><a href="https://codeberg.org/lanticy/guandan" target="_blank">Code source</a></p>
 								</div>
 								<div class="project-item">
 									<h3><a href="https://github.com/AcideFluorhydrique/carrot" target="_blank">The Last Carrot</a></h3>
 									<div class="tags"><span class="tag">Kotlin</span><span class="tag">Android</span></div>
-									<p class="project-description">A cheerful lane tower-defense game published on F-Droid, with no ads, no trackers and no network permission.</p>
-									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/carrot" target="_blank">Source</a></p>
+									<p class="project-description">Un joyeux jeu de tower defense en couloirs, publié sur F-Droid, sans publicité, sans traqueurs et sans permission réseau.</p>
+									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/carrot" target="_blank">Code source</a></p>
 								</div>
 								<div class="project-item">
 									<h3><a href="https://github.com/AcideFluorhydrique/geminiAssist" target="_blank">GeminiAssist</a></h3>
 									<div class="tags"><span class="tag">Java</span><span class="tag">Android</span></div>
-									<p class="project-description">A minimal, hardened WebView wrapper that brings Google Gemini to devices without Google Mobile Services.</p>
-									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/geminiAssist" target="_blank">Source</a></p>
+									<p class="project-description">Une enveloppe WebView minimale et renforcée qui permet d'utiliser Google Gemini sur les appareils dépourvus des services Google Mobile.</p>
+									<p class="project-links"><a href="https://github.com/AcideFluorhydrique/geminiAssist" target="_blank">Code source</a></p>
 								</div>
 							</div>
 
 							<div class="project-category">
-								<h2 class="section-title">🤝 Upstream Contributions</h2>
+								<h2 class="section-title">🤝 Contributions en amont</h2>
 
 								<div class="project-item">
-									<p class="project-description">I submit features, bug fixes and translations to the open-source projects I use, including:</p>
+									<p class="project-description">Je propose des fonctionnalités, des corrections de bugs et des traductions aux projets open source que j'utilise, notamment :</p>
 
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/skyschub/chrome-mask" target="_blank">Chrome Mask</a>
 										</div>
-										<p class="project-description">Makes Firefox wear a mask to look like Chrome to websites that otherwise won't work.</p>
+										<p class="project-description">Fait porter un masque à Firefox pour qu'il ressemble à Chrome auprès des sites qui refusent de fonctionner autrement.</p>
 									</div>
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/maksimowiczm/find-my-ip" target="_blank">Find my IP</a>
 										</div>
-										<p class="project-description">A lightweight app that fetches and stores your current IP address.</p>
+										<p class="project-description">Une application légère qui récupère et enregistre votre adresse IP actuelle.</p>
 									</div>
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/justinrdonnelly/bouncer" target="_blank">Bouncer</a>
 										</div>
-										<p class="project-description">Helps you choose the correct firewall zone for wireless connections.</p>
+										<p class="project-description">Aide à choisir la bonne zone de pare-feu pour les connexions sans fil.</p>
 									</div>
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/itagagaki/DeepL-Selected-Text" target="_blank">DeepL Selected Text</a>
 										</div>
-										<p class="project-description">Translate selected text with DeepL.</p>
+										<p class="project-description">Traduire le texte sélectionné avec DeepL.</p>
 									</div>
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/pintargasper/SmokingTracker" target="_blank">Smoking Tracker</a>
 										</div>
-										<p class="project-description">An easy-to-use app for tracking smoking habits and progress towards quitting.</p>
+										<p class="project-description">Une application simple pour suivre sa consommation de tabac et ses progrès vers l'arrêt.</p>
 									</div>
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/woheller69/gptAssist" target="_blank">gptAssist</a>
 										</div>
-										<p class="project-description">A simple WebView wrapper for ChatGPT with a better mobile experience.</p>
+										<p class="project-description">Une simple enveloppe WebView pour ChatGPT, avec une meilleure expérience mobile.</p>
 									</div>
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/james-fray/tab-reloader" target="_blank">Tab Reloader</a>
 										</div>
-										<p class="project-description">A multi-browser extension that reloads tabs automatically.</p>
+										<p class="project-description">Une extension multi-navigateurs pour recharger automatiquement les onglets.</p>
 									</div>
 									<div class="contribution-item">
 										<div class="sub-project-title">
 											<a href="https://github.com/insin/control-panel-for-twitter" target="_blank">Control Panel for Twitter</a>
 										</div>
-										<p class="project-description">More control over your Twitter/X timeline, plus missing features and UI improvements.</p>
+										<p class="project-description">Plus de contrôle sur la timeline Twitter/X, avec des fonctionnalités manquantes et des améliorations d'interface.</p>
 									</div>
 								</div>
 							</div>
