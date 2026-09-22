@@ -4,31 +4,62 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<title>Geo Wang – Mathematics Student</title>
+	<link rel="icon" href="https://play-lh.googleusercontent.com/EyZzBivWAT_6dFOiIZ9JwuyE8duosWa98oDXe46yVUqMMTp07b0JVdmJEYxMrRWXzl1K=w240-h480-rw" type="image/png">
+	<script src="/assets/theme.js"></script>
 	<style>
+        /* NYU brand colors, mapped to roles */
         :root {
-            --nyu-violet: #57068c;
-            --ultra-violet: #8900e1;
-            --deep-violet: #330662;
-            --medium-violet-1: #702b9d;
-            --medium-violet-2: #7b5aa6;
-            --light-violet-1: #ab82c5;
-            --light-violet-2: #eee6f3;
-            --dark-gray: #404040;
-            --medium-gray-1: #6d6d6d;
-            --medium-gray-3: #d6d6d6;
-            --light-gray: #f2f2f2;
+            --page-bg: #eee6f3;
+            --header-bg: #57068c;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(51, 6, 98, 0.08);
+            --heading: #330662;
+            --text: #404040;
+            --accent: #57068c;
+            --accent-soft: #ab82c5;
+            --item-bg: #f2f2f2;
+            --item-border: #8900e1;
+            --link: #702b9d;
+            --link-hover: #57068c;
+            --chip-bg: #eee6f3;
+            --chip-text: #330662;
+            --status-bg: #57068c;
+            --contrib-bg: #ffffff;
+            --quote: #7b5aa6;
+            --muted: #6d6d6d;
+        }
+
+        [data-theme="dark"] {
+            --page-bg: #140228;
+            --header-bg: #330662;
+            --card-bg: #1f0439;
+            --card-shadow: rgba(0, 0, 0, 0.4);
+            --heading: #eee6f3;
+            --text: #d6d6d6;
+            --accent: #ab82c5;
+            --accent-soft: #7b5aa6;
+            --item-bg: #2a0a4b;
+            --item-border: #ab82c5;
+            --link: #c9a8de;
+            --link-hover: #eee6f3;
+            --chip-bg: #3a1463;
+            --chip-text: #eee6f3;
+            --status-bg: #8900e1;
+            --contrib-bg: #1f0439;
+            --quote: #ab82c5;
+            --muted: #b8b8b8;
         }
 
         body {
-            background-color: var(--light-violet-2);
+            background-color: var(--page-bg);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
-            color: var(--dark-gray);
+            color: var(--text);
         }
 
         .site-header {
-            background-color: var(--nyu-violet);
+            background-color: var(--header-bg);
             color: #ffffff;
             padding: 2rem 1rem;
             text-align: center;
@@ -79,7 +110,7 @@
         }
 
         .lang-nav a[aria-current="page"] {
-            border-bottom: 2px solid var(--light-violet-1);
+            border-bottom: 2px solid #ab82c5;
         }
 
         .content-area {
@@ -89,17 +120,17 @@
         }
 
         .hentry {
-            background-color: #ffffff;
+            background-color: var(--card-bg);
             padding: 2.5rem;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(51, 6, 98, 0.08);
+            box-shadow: 0 4px 12px var(--card-shadow);
         }
 
         .entry-header h1 {
-            color: var(--deep-violet);
+            color: var(--heading);
             font-size: 2rem;
             margin: 0 0 1.5rem;
-            border-bottom: 3px solid var(--nyu-violet);
+            border-bottom: 3px solid var(--accent);
             padding-bottom: 0.5rem;
         }
 
@@ -110,16 +141,16 @@
         }
 
         .intro-section a {
-            color: var(--medium-violet-1);
+            color: var(--link);
             font-weight: 600;
         }
 
         .quote {
-            color: var(--medium-violet-2);
+            color: var(--quote);
             font-style: italic;
             margin: 0 0 1.5rem;
             padding-left: 1rem;
-            border-left: 3px solid var(--light-violet-1);
+            border-left: 3px solid var(--accent-soft);
         }
 
         .tech-stack {
@@ -130,8 +161,8 @@
         }
 
         .tech-badge {
-            background-color: var(--light-violet-2);
-            color: var(--deep-violet);
+            background-color: var(--chip-bg);
+            color: var(--chip-text);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.9rem;
@@ -143,11 +174,11 @@
         }
 
         .section-title {
-            color: var(--deep-violet);
+            color: var(--heading);
             font-size: 1.5rem;
             margin: 2rem 0 1rem;
             padding-left: 1rem;
-            border-left: 4px solid var(--nyu-violet);
+            border-left: 4px solid var(--accent);
         }
 
         .project-category {
@@ -157,15 +188,15 @@
         .project-item {
             margin: 1.5rem 0;
             padding: 1.2rem;
-            background-color: var(--light-gray);
-            border-left: 4px solid var(--ultra-violet);
+            background-color: var(--item-bg);
+            border-left: 4px solid var(--item-border);
             border-radius: 4px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .project-item:hover {
             transform: translateX(5px);
-            box-shadow: 0 2px 8px rgba(51, 6, 98, 0.12);
+            box-shadow: 0 2px 8px var(--card-shadow);
         }
 
         .project-item h3 {
@@ -174,18 +205,18 @@
         }
 
         .project-item a {
-            color: var(--medium-violet-1);
+            color: var(--link);
             text-decoration: none;
             font-weight: 600;
         }
 
         .project-item a:hover {
-            color: var(--nyu-violet);
+            color: var(--link-hover);
             text-decoration: underline;
         }
 
         .project-description {
-            color: var(--dark-gray);
+            color: var(--text);
             line-height: 1.6;
             margin: 0.5rem 0;
         }
@@ -198,8 +229,8 @@
         .contribution-item {
             margin: 1rem 0 1rem 2rem;
             padding: 0.8rem;
-            background-color: #ffffff;
-            border-left: 3px solid var(--light-violet-1);
+            background-color: var(--contrib-bg);
+            border-left: 3px solid var(--accent-soft);
             border-radius: 3px;
         }
 
@@ -211,15 +242,15 @@
         }
 
         .tag {
-            background-color: var(--light-violet-2);
-            color: var(--deep-violet);
+            background-color: var(--chip-bg);
+            color: var(--chip-text);
             padding: 0.15rem 0.6rem;
             border-radius: 12px;
             font-size: 0.8rem;
         }
 
         .tag.status {
-            background-color: var(--nyu-violet);
+            background-color: var(--status-bg);
             color: #ffffff;
         }
 
@@ -230,7 +261,7 @@
 
         .project-links a + a::before {
             content: "·";
-            color: var(--medium-gray-1);
+            color: var(--muted);
             margin: 0 0.5rem;
             display: inline-block;
         }

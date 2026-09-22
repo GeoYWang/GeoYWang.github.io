@@ -4,12 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact List</title>
+  <link rel="icon" href="https://play-lh.googleusercontent.com/EyZzBivWAT_6dFOiIZ9JwuyE8duosWa98oDXe46yVUqMMTp07b0JVdmJEYxMrRWXzl1K=w240-h480-rw" type="image/png">
+  <script src="/assets/theme.js"></script>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 2rem; }
-    h1 { color: #333; }
+    :root { --bg: #eee6f3; --heading: #330662; --text: #404040; --link: #702b9d; }
+    [data-theme="dark"] { --bg: #140228; --heading: #eee6f3; --text: #d6d6d6; --link: #c9a8de; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 2rem; background: var(--bg); color: var(--text); }
+    h1 { color: var(--heading); }
     ul { list-style: none; padding: 0; }
     li { margin: 0.5rem 0; }
-    a { text-decoration: none; color: #0066cc; }
+    a { text-decoration: none; color: var(--link); }
     a:hover { text-decoration: underline; }
   </style>
 </head>

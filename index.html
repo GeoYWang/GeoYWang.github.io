@@ -4,11 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Language - 选择语言</title>
+    <title>Select Language - 選擇語言</title>
+    <script src="/assets/theme.js"></script>
         <link rel="icon"
         href="https://play-lh.googleusercontent.com/EyZzBivWAT_6dFOiIZ9JwuyE8duosWa98oDXe46yVUqMMTp07b0JVdmJEYxMrRWXzl1K=w240-h480-rw"
         type="image/png">
     <style>
+        /* NYU violet panel over the photo; the blue hover accents stay as they are */
+        :root {
+            --overlay: rgba(0, 0, 0, 0.15);
+            --panel-bg: rgba(87, 6, 140, 0.82);
+        }
+
+        [data-theme="dark"] {
+            --overlay: rgba(0, 0, 0, 0.5);
+            --panel-bg: rgba(51, 6, 98, 0.88);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -36,12 +48,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--overlay);
             z-index: 1;
         }
 
         .language-selection-area {
-            background: rgba(88, 47, 133, 0.8);
+            background: var(--panel-bg);
             /* 修改：将 alpha 值从 0.15 增加到 0.5 以降低透明度，使区域更不透明 (Change: Increased alpha from 0.15 to 0.5 to reduce transparency, making the area more opaque) */
             backdrop-filter: blur(10px);
             border-radius: 20px;

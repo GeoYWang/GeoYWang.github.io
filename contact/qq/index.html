@@ -4,20 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/NYU.png" type="image/png">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/EyZzBivWAT_6dFOiIZ9JwuyE8duosWa98oDXe46yVUqMMTp07b0JVdmJEYxMrRWXzl1K=w240-h480-rw" type="image/png">
+    <script src="/assets/theme.js"></script>
     <title>QQ – Why I No Longer Use It</title>
     <style>
+        /* NYU brand colors, mapped to roles */
         :root {
-            --nyu-violet: #57068c;
-            --ultra-violet: #8900e1;
-            --deep-violet: #330662;
-            --medium-violet-1: #702b9d;
-            --light-violet-1: #ab82c5;
-            --light-violet-2: #eee6f3;
-            --dark-gray: #404040;
-            --medium-gray-1: #6d6d6d;
-            --medium-gray-3: #d6d6d6;
-            --light-gray: #f2f2f2;
+            --page-bg: #eee6f3;
+            --header-bg: #57068c;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(51, 6, 98, 0.08);
+            --heading: #330662;
+            --text: #404040;
+            --muted: #6d6d6d;
+            --accent: #57068c;
+            --accent-soft: #ab82c5;
+            --notice-bg: #eee6f3;
+            --item-bg: #f2f2f2;
+            --item-border: #8900e1;
+            --label-bg: #57068c;
+            --tile-bg: #eee6f3;
+            --tile-hover-bg: #ffffff;
+            --tile-text: #330662;
+            --link: #702b9d;
+            --rule: #d6d6d6;
+        }
+
+        [data-theme="dark"] {
+            --page-bg: #140228;
+            --header-bg: #330662;
+            --card-bg: #1f0439;
+            --card-shadow: rgba(0, 0, 0, 0.4);
+            --heading: #eee6f3;
+            --text: #d6d6d6;
+            --muted: #b8b8b8;
+            --accent: #ab82c5;
+            --accent-soft: #7b5aa6;
+            --notice-bg: #2a0a4b;
+            --item-bg: #2a0a4b;
+            --item-border: #ab82c5;
+            --label-bg: #8900e1;
+            --tile-bg: #2a0a4b;
+            --tile-hover-bg: #3a1463;
+            --tile-text: #eee6f3;
+            --link: #c9a8de;
+            --rule: #3a1463;
         }
 
         * {
@@ -28,13 +59,13 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            background-color: var(--light-violet-2);
-            color: var(--dark-gray);
+            background-color: var(--page-bg);
+            color: var(--text);
             line-height: 1.7;
         }
 
         .site-header {
-            background-color: var(--nyu-violet);
+            background-color: var(--header-bg);
             color: #ffffff;
             text-align: center;
             padding: 2.5rem 1rem 2rem;
@@ -56,15 +87,15 @@
         }
 
         .card {
-            background: #ffffff;
+            background: var(--card-bg);
             border-radius: 8px;
             padding: 2.5rem;
-            box-shadow: 0 4px 12px rgba(51, 6, 98, 0.08);
+            box-shadow: 0 4px 12px var(--card-shadow);
         }
 
         .notice {
-            background: var(--light-violet-2);
-            border-left: 4px solid var(--nyu-violet);
+            background: var(--notice-bg);
+            border-left: 4px solid var(--accent);
             border-radius: 4px;
             padding: 1.2rem 1.5rem;
             margin-bottom: 2rem;
@@ -75,16 +106,16 @@
         }
 
         .section h2 {
-            color: var(--deep-violet);
+            color: var(--heading);
             font-size: 1.4rem;
-            border-left: 4px solid var(--nyu-violet);
+            border-left: 4px solid var(--accent);
             padding-left: 1rem;
             margin-bottom: 1rem;
         }
 
         .incident {
-            background: var(--light-gray);
-            border-left: 4px solid var(--ultra-violet);
+            background: var(--item-bg);
+            border-left: 4px solid var(--item-border);
             border-radius: 4px;
             padding: 1.2rem;
             margin: 1rem 0;
@@ -92,7 +123,7 @@
 
         .incident-label {
             display: inline-block;
-            background: var(--nyu-violet);
+            background: var(--label-bg);
             color: #ffffff;
             font-size: 0.75rem;
             font-weight: 600;
@@ -104,7 +135,7 @@
         }
 
         .incident h3 {
-            color: var(--deep-violet);
+            color: var(--heading);
             font-size: 1.1rem;
             margin-bottom: 0.4rem;
         }
@@ -125,18 +156,18 @@
 
         .contacts a {
             display: block;
-            background: var(--light-violet-2);
+            background: var(--tile-bg);
             border: 1px solid transparent;
             border-radius: 6px;
             padding: 0.8rem 1rem;
-            color: var(--deep-violet);
+            color: var(--tile-text);
             text-decoration: none;
             transition: border-color 0.2s, background 0.2s;
         }
 
         .contacts a:hover {
-            border-color: var(--light-violet-1);
-            background: #ffffff;
+            border-color: var(--accent-soft);
+            background: var(--tile-hover-bg);
         }
 
         .contacts strong {
@@ -144,7 +175,7 @@
         }
 
         .contacts span {
-            color: var(--medium-gray-1);
+            color: var(--muted);
             font-size: 0.9rem;
         }
 
@@ -153,10 +184,10 @@
         }
 
         .footer {
-            border-top: 1px solid var(--medium-gray-3);
+            border-top: 1px solid var(--rule);
             margin-top: 2.5rem;
             padding-top: 1.5rem;
-            color: var(--medium-gray-1);
+            color: var(--muted);
             font-size: 0.9rem;
             text-align: center;
         }
@@ -168,7 +199,7 @@
         .back {
             display: inline-block;
             margin-top: 1.5rem;
-            color: var(--medium-violet-1);
+            color: var(--link);
             font-weight: 600;
             text-decoration: none;
         }
